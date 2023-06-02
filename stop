@@ -1,0 +1,52 @@
+[1mdiff --git a/src/main/java/com/example/sau/contoller/AdminController.java b/src/main/java/com/example/sau/contoller/AdminController.java[m
+[1mindex 43f91ee..fde0dab 100644[m
+[1m--- a/src/main/java/com/example/sau/contoller/AdminController.java[m
+[1m+++ b/src/main/java/com/example/sau/contoller/AdminController.java[m
+[36m@@ -7,6 +7,7 @@[m [mimport org.springframework.stereotype.Controller;[m
+ import org.springframework.ui.Model;[m
+ import org.springframework.web.bind.annotation.GetMapping;[m
+ import org.springframework.web.bind.annotation.ModelAttribute;[m
+[32m+[m[32mimport org.springframework.web.bind.annotation.PathVariable;[m
+ import org.springframework.web.bind.annotation.PostMapping;[m
+ [m
+ @Controller[m
+[36m@@ -30,9 +31,16 @@[m [mpublic class AdminController {[m
+         return "categoriesAdd";[m
+     }[m
+ [m
+[31m-    @PostMapping ("/admin/categories/add")[m
+[32m+[m[32m        @PostMapping ("/admin/categories/add")[m
+     public String postCatAdd(@ModelAttribute("category") Category category){[m
+         categoryService.addCategory(category);[m
+         return "redirect:/admin/categories";[m
+     }[m
+[32m+[m
+[32m+[m[32m    @GetMapping("/admin/categories/delete/{id}")[m
+[32m+[m[32m    public String deleteCat(@PathVariable int id){[m
+[32m+[m[32m        categoryService.removeCategoryById(id);[m
+[32m+[m[32m        return "redirect:/admin/categories";[m
+[32m+[m[32m    }[m
+[32m+[m
+ }[m
+[1mdiff --git a/src/main/java/com/example/sau/model/Item.java b/src/main/java/com/example/sau/model/Item.java[m
+[1mindex a657623..edb63ae 100644[m
+[1m--- a/src/main/java/com/example/sau/model/Item.java[m
+[1m+++ b/src/main/java/com/example/sau/model/Item.java[m
+[36m@@ -1,2 +1,4 @@[m
+[31m-package com.example.sau.model;public class Item {[m
+[32m+[m[32mpackage com.example.sau.model;[m
+[32m+[m
+[32m+[m[32mpublic class Item {[m
+ }[m
+[1mdiff --git a/src/main/java/com/example/sau/service/CategoryService.java b/src/main/java/com/example/sau/service/CategoryService.java[m
+[1mindex 5beb1fb..effe46f 100644[m
+[1m--- a/src/main/java/com/example/sau/service/CategoryService.java[m
+[1m+++ b/src/main/java/com/example/sau/service/CategoryService.java[m
+[36m@@ -19,4 +19,7 @@[m [mpublic class CategoryService {[m
+     public void addCategory(Category category){[m
+         categoryRepo.save(category);[m
+     }[m
+[32m+[m[32m    public void removeCategoryById(long id){[m
+[32m+[m[32m        categoryRepo.deleteById(id);[m
+[32m+[m[32m    }[m
+ }[m
