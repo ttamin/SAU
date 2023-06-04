@@ -2,6 +2,8 @@ package com.example.sau.service;
 
 import com.example.sau.model.Product;
 import com.example.sau.repository.ProductRepo;
+import com.example.sau.service.impl.IProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,21 +11,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductService {
+@RequiredArgsConstructor
+
+public class ProductService implements IProductService {
     @Autowired
     ProductRepo productRepo;
+    @Override
+
     public List<Product> getAllProducts(){
         return productRepo.findAll();
     }
+    @Override
+
     public void addProduct(Product product){
         productRepo.save(product);
     }
+    @Override
+
     public void removeProductById(long id){
         productRepo.deleteById(id);
     }
+    @Override
+
     public Optional<Product> getProductById(long id){
         return productRepo.findById(id);
     }
+    @Override
+
     public List<Product> getAllProductsByCategoryId(long id){
         return productRepo.findAllByCategory_Id(id);
     }
