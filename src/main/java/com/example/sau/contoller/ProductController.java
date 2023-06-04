@@ -1,6 +1,7 @@
 package com.example.sau.contoller;
 
 import com.example.sau.dto.ProductDto;
+import com.example.sau.model.Category;
 import com.example.sau.model.Product;
 import com.example.sau.service.CategoryService;
 import com.example.sau.service.ProductService;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -64,6 +66,24 @@ public class ProductController {
     public String deleteProduct(@PathVariable long id){
         productService.removeProductById(id);
         return "redirect:/admin/products";
+    }
+
+    @GetMapping("/admin/products/update/{id}")
+    public String updateProduct(@PathVariable long id, Model model){
+        Product product = productService.getProductById(id).get();
+        ProductDto productDto = new ProductDto();
+        productDto.setId(product.getId());
+        productDto.setName(product.getName());
+        productDto.setCategoryId(product.getCategory().getId());
+        productDto.setPrice(product.getPrice());
+        productDto.setDescription(product.getDescription());
+        productDto.setImageName(product.getImageName());
+
+        model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("productDto", productDto);
+
+        return "productsAdd";
+
     }
 
 }
