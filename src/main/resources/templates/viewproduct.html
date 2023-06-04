@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h5 class="card-title" th:text="${product.name}"></h5>
+    <h4><span th:text="${product.price}"></span> </h4>
+    <p th:text="${product.description}">This drink very strong</p>
+    <img src="" height="150px" width="150px" th:src="@{${'/productImages/'+product.imageName}}">
+
+</div>
+</body>
+</html>
