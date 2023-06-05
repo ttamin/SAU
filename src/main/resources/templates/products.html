@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<nav>
-    <a class="nav-link" th:href="@{/admin}" href="#">admin-home</a>
-    <a class="nav-link" th:href="@{/logout}" href="#">logout</a>
-</nav>
-<div class="container">
-    <a th:href="@{/admin/products/add}" class="btn btn-primary">Add Product</a>
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">SN</th>
-            <th scope="col">Product name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Preview</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Update</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product, iStat : ${products}">
-            <th scope="row" th:text="${iStat.index + 1}">1</th>
-            <td th:text="${product.name}">Larry</td>
-            <td th:text="${product.category.name}">Larry</td>
-<!--            ??image of product возмлжно изза path-->
-            <td><img src="#" height="100px" width="100px" th:src="@{${'/productImages' +product.imageName}}"></td>
-<!--            <td><img src="#" height="100px" width="100px" th:src="${'data:image/jpeg;charset=utf-8;base64,' + images.get(product.imageName)}"></td>-->
 
-            <td><a href="#" th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a> </td>
-            <td><a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}" class="btn btn-warning">Update</a> </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <header class="header">
+        <nav>
+            <a href="/src/main/resoures/templates/products.html" th:href="@{/admin/products}">Products</a>
+            <a href="/src/main/resoures/templates/productsAdd.html" th:href="@{/admin/products/add}" class="btn btn-primary">Add Product</a>
+        </nav>
+    </header>
+
+    <section th:insert="blocks/section :: section"></section>
+
+
+    <main class="main">
+        <div class="container">
+            <table class="table">
+                <thead class="thead-light"><!--Groups the header content in a table-->
+                    <tr><!-- Defines a row in a table -->
+                        <th scope="col">SN</th><!-- Defines a header cell in a table -->
+                        <th scope="col">Product name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Preview</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                    </thead>
+                <tbody><!-- Groups the body content in a table -->
+                    <tr th:each="product, iStat : ${products}">
+                        <th scope="row" th:text="${iStat.index + 1}">1</th>
+                        <td th:text="${product.name}">Larry</td>
+                        <td th:text="${product.category.name}">Larry</td> 
+            <!--            ??image of product возмлжно изза path-->
+                        <td><img src="#" height="100px" width="100px" th:src="@{${'/productImages/' +product.imageName}}"></td>
+            <!--            <td><img src="#" height="100px" width="100px" th:src="${'data:image/jpeg;charset=utf-8;base64,' + images.get(product.imageName)}"></td>-->
+        
+                        <td><a href="#" th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a> </td>
+                        <td><a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}" class="btn btn-warning">Update</a> </td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+    </main>
 </body>
 </html>

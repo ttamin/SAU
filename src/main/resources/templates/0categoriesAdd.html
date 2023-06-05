@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav>
+    <a class="nav-link" th:href="@{/admin}" href="#">admin-home</a>
+    <a class="nav-link" th:href="@{/logout}" href="#">logout</a>
+</nav>
+<div class="container">
+    <div class="row">
+        <form th:action="@{/admin/categories/add}" method="post" th:object="${category}">
+            <input type="hidden" name="id" th:field="*{id}">
+            <div class = "form-group">
+<!--                <label for="name">Name</label>-->
+                <label>Name</label>
+                <input type="text" class="form-control" required th:field="*{name}" name="name">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

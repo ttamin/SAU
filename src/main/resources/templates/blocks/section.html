@@ -1,0 +1,16 @@
+<div th:fragment="section">
+    <section class="sidebar" >
+        <div class="logo">
+            <a href="/src/main/resoures/templates/adminHome.html" th:href="@{/admin}">SAU</a>
+        </div>
+        <ul>
+            <li><a href="/src/main/resoures/templates/categories.html" th:href="@{/admin/categories}" class="card-link btn btn-primary">Categories</a></li>
+            <li><a href="/src/main/resoures/templates/products.html" th:href="@{/admin/products}" class="card-link btn btn-primary">Products</a></li>
+            <li><a class="nav-link" th:href="@{/admin}" href="#">Admin-home</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Blogs</a></li>
+            <li><a class="nav-link" th:href="@{/logout}" href="#">Log out</a></li>
+        </ul>
+    </section>
+</div>

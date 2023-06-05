@@ -2,34 +2,46 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>categories</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-  <nav>
-    <a class="nav-link" th:href="@{/admin}" href="#">admin-home</a>
-    <a class="nav-link" th:href="@{/logout}" href="#">logout</a>
-  </nav>
-  <div class="container">
-    <a th:href="@{/admin/categories/add}" class="btn btn-primary">Add category</a>
-    <table class="table">
-      <thead class="thead-light">
-      <tr>
-        <th scope="col">SN</th>
-        <th scope="col">Category name</th>
-        <th scope="col">Delete</th>
-        <th scope="col">Update</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="category, iStat : ${categories}">
-        <th scope="row" th:text="${iStat.index + 1}">1</th>
-        <td th:text="${category.name}">Larry</td>
-        <td><a href="#" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a> </td>
-        <td><a href="#" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a> </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
 
+    <header class="header">
+        <nav>
+            <a href="/src/main/resoures/templates/categories.html" th:href="@{/admin/categories}">Categories</a>
+            <a href="/src/main/resoures/templates/categoriesAdd.html" th:href="@{/admin/categories/add}" class="btn btn-primary">Add category</a>
+        </nav>
+    </header>
+
+    <section th:insert="blocks/section :: section"></section>
+
+    
+    <main class="main">
+        <div class="container">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">SN</th>
+                        <th scope="col">Category name</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+        
+              <tbody>
+              <tr th:each="category, iStat : ${categories}">
+                <th scope="row" th:text="${iStat.index + 1}">1</th>
+                <td th:text="${category.name}">Larry</td>
+                <td><a href="#" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a> </td>
+                <td><a href="#" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a> </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+    </main>
 </body>
-</html>
+</html> 

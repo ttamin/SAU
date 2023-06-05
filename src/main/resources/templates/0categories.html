@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>categories</title>
+</head>
+<body>
+  <nav>
+    <a class="nav-link" th:href="@{/admin}" href="#">admin-home</a>
+    <a class="nav-link" th:href="@{/logout}" href="#">logout</a>
+  </nav>
+  <div class="container">
+    <a th:href="@{/admin/categories/add}" class="btn btn-primary">Add category</a>
+    <table class="table">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col">SN</th>
+        <th scope="col">Category name</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="category, iStat : ${categories}">
+        <th scope="row" th:text="${iStat.index + 1}">1</th>
+        <td th:text="${category.name}">Larry</td>
+        <td><a href="#" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a> </td>
+        <td><a href="#" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a> </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

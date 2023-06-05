@@ -2,14 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<h1>Welcome, Admin</h1>
-<a href="#" th:href="@{/admin/categories}" class="card-link btn btn-primary">Manage categories</a>
-<a href="#" th:href="@{/admin/products}" class="card-link btn btn-primary">Manage products</a>
 
-<a class="nav-link" th:href="@{/admin}" href="#">admin-home</a>
-<a class="nav-link" th:href="@{/logout}" href="#">logout</a>
+    <header class="header">
+<!--         <h5>Categories</h5>
+        <a href="#">Add category</a> -->
+    </header>
+
+    <section th:insert="blocks/section :: section"></section>
+
+    <main class="main">
+        <h1>Welcome, Admin! Good Job!</h1>
+    </main>
+
 </body>
 </html>

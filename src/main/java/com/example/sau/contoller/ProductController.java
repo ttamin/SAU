@@ -1,7 +1,6 @@
 package com.example.sau.contoller;
 
 import com.example.sau.dto.ProductDto;
-import com.example.sau.model.Category;
 import com.example.sau.model.Product;
 import com.example.sau.service.CategoryService;
 import com.example.sau.service.ProductService;
@@ -15,8 +14,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
-import java.util.UUID;
 
 @Controller
 public class ProductController {

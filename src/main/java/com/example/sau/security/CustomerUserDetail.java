@@ -1,7 +1,7 @@
-//package com.example.sau.config;
+//package security;
 //
-//import com.example.sau.model.Role;
 //import com.example.sau.model.User;
+//import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
@@ -10,26 +10,29 @@
 //import java.util.Collection;
 //import java.util.List;
 //
-//public class UsrDetails implements UserDetails {
 //
-//    private User user;
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-//        for(Role role : user.getRoles()){
-//            authorities.add(new SimpleGrantedAuthority(role.getName()));
-//        }
-//        return authorities;
+//public class CustomerUserDetail extends User implements UserDetails {
+//
+//    public CustomerUserDetail(User user){
+//        super(user);
 //    }
 //
 //    @Override
-//    public String getPassword() {
-//        return user.getPassword();
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<GrantedAuthority> authorityList = new ArrayList<>();
+//        super.getRoles().forEach(role -> {
+//            authorityList.add(new SimpleGrantedAuthority(role.getName()));
+//        });
+//        return authorityList;
 //    }
 //
 //    @Override
 //    public String getUsername() {
-//        return user.getUsername();
+//        return super.getEmail();
+//    }
+//    @Override
+//    public String getPassword() {
+//        return super.getPassword();
 //    }
 //
 //    @Override

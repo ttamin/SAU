@@ -10,9 +10,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
     User findByUsername(String username);
-    User save(UserDto userDto);
-    User update(UserDto userDto);
-    User changePassword(UserDto userDto);
     boolean existsByUsername(String username);
 
 }
