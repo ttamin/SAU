@@ -20,5 +20,5 @@ public class Category {
     @Column(name = "category_id")
     private Long id;
     private String name;
-//    private boolean isActive;
+    private boolean isActive;
 }

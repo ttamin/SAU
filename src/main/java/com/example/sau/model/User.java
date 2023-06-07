@@ -3,6 +3,8 @@ package com.example.sau.model;
 import jakarta.persistence.*;
 //import jakarta.validation.constraints.Email;
 //import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +26,7 @@ public class User {
     private String firstname;
     private String lastname;
     @Column(nullable = false, unique = true)
-//    @Email(message = "{error.invalid_email}")
+    @Email(message = "{error.invalid_email}")
     private String email;
 //    @NotEmpty
     private String password;
@@ -38,7 +40,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id",
                     referencedColumnName = "id"))
     private List<Role> roles;
-
+//    private String address;
+//    private String city;
     public User(User user) {
     }
 }

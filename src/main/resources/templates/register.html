@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class = "container">
+        <div class="col-sm-6">
+            <h3>Sign Up Now</h3>
+            <p>Please fill out this to register</p>
+            <form th:action="@{/register}" th:object="${com.example.sau.model.User}" method="post">
+                <div class="form-group">
+                    <label>First name</label>
+                    <input type="text"  id="firstName" autofocus="autofocus"
+                           class="form-control" required name="firstName" th:field="*{firstname}" >
+<!--                    <input type="text" name="firstName" id="firstName" required placeholder="Your Firstname" th:field="*{firstName}">-->
+                </div>
+                <div class="form-group">
+                    <label>Last name</label>
+                    <input type="text"  id="lastName" autofocus="autofocus"
+                           class="form-control" required name="lastName" th:field="*{lastname}" >
+                </div>
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="text"  id="email" autofocus="autofocus"
+                           class="form-control" required name="email" th:field="*{email}" >
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password"  id="password" autofocus="autofocus"
+                           class="form-control" required name="password" th:field="*{password}" >
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <span>Registered already? <a href="src/main/resources/templates/login.html" th:href="@{/login}">Login here.</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

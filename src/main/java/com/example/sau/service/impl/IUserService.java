@@ -6,8 +6,9 @@ import com.example.sau.model.User;
 import java.util.List;
 
 public interface IUserService {
-//    public User createUser(User user);
+    User createUser(User user);
     List<User> getAllUsers();
-    public User findByUsername(String username);
+    User findByUsername(String username);
     User changePassword(UserDto userDto);
+    User getUserByEmail(String email);
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav>
-  <a class="nav-link" th:href="@{/}" href="#">home</a>
+  <a class="nav-link" th:href="@{/static}" href="#">home</a>
   <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
   <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
   <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>

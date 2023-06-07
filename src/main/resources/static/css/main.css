@@ -8,7 +8,7 @@ body{
     grid-template-rows: 90px 1fr;/* ширина header */
 }
 
-/* header */
+ /*header */
 
 .header{
     background-color: #ffffff;

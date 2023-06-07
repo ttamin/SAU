@@ -20,6 +20,7 @@ public class Product {
     private Category category;
     private double price;
     private String description;
-
     private String imageName;
+    private int currentQuantity;
+    private boolean isActive;
 }

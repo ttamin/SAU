@@ -12,4 +12,6 @@ public class ProductDto {
     private String description;
     private String imageName;
 //    private byte[] imageName;
+    private int currentQuantity;
+    private boolean isActive;
 }

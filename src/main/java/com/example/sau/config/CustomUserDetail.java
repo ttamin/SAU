@@ -10,26 +10,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class UsrDetails implements UserDetails {
-
-    private User user;
+public class CustomUserDetail extends User implements UserDetails{
+    public CustomUserDetail(User user){
+        super(user);
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for(Role role : user.getRoles()){
+        super.getRoles().forEach(role -> {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+        });
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return super.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return super.getEmail();
     }
 
     @Override

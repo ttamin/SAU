@@ -12,4 +12,5 @@ public interface IProductService {
     public Optional<Product> getProductById(long id);
     public List<Product> getAllProductsByCategoryId(long id);
 
+
 }
