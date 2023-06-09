@@ -22,5 +22,6 @@ public class Product {
     private String description;
     private String imageName;
     private int currentQuantity;
+    @Column(columnDefinition = "true")
     private boolean isActive;
 }

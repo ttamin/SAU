@@ -48,7 +48,7 @@ public class SecurityConfig  {
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/shop/**", "register").permitAll()
+                        .requestMatchers("/", "/shop/**", "/register").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

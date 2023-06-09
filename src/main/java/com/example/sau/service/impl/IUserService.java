@@ -6,9 +6,13 @@ import com.example.sau.model.User;
 import java.util.List;
 
 public interface IUserService {
-    User createUser(User user);
     List<User> getAllUsers();
     User findByUsername(String username);
     User changePassword(UserDto userDto);
     User getUserByEmail(String email);
+    boolean isInvalidUser(UserDto userDto);
+    String invalidUser(UserDto userDto);
+
+    public void save(UserDto userDto);
+
 }

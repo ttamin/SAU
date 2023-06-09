@@ -20,5 +20,6 @@ public class Category {
     @Column(name = "category_id")
     private Long id;
     private String name;
+    @Column(columnDefinition = "true")
     private boolean isActive;
 }

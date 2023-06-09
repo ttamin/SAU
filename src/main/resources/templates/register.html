@@ -10,6 +10,8 @@
         <div class="col-sm-6">
             <h3>Sign Up Now</h3>
             <p>Please fill out this to register</p>
+            <h3><span class="has-error" th:text="${validationErrors}"></span></h3>
+
             <form th:action="@{/register}" th:object="${com.example.sau.model.User}" method="post">
                 <div class="form-group">
                     <label>First name</label>
@@ -32,6 +34,8 @@
                     <input type="password"  id="password" autofocus="autofocus"
                            class="form-control" required name="password" th:field="*{password}" >
                 </div>
+                <input type="checkbox" name="isUserCheck" class="checkbox" id="checkbox" value="yes">
+                <label for="checkbox"> I agree with the terms of service</label>
                 <div>
                     <button type="submit" class="btn btn-success">Register</button>
                     <span>Registered already? <a href="src/main/resources/templates/login.html" th:href="@{/login}">Login here.</a></span>

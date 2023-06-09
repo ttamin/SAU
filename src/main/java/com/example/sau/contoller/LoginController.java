@@ -6,6 +6,7 @@ import com.example.sau.model.Role;
 import com.example.sau.model.User;
 import com.example.sau.repository.RoleRepo;
 import com.example.sau.repository.UserRepo;
+import com.example.sau.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class LoginController {
     UserRepo userRepo;
     @Autowired
     RoleRepo roleRepo;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -42,15 +45,38 @@ public class LoginController {
         return "register";
     }
 
+//    @PostMapping("/register")
+//    public String registerPost(@ModelAttribute("user") User user, HttpServletRequest request) throws ServletException{
+//        String password = user.getPassword();
+//        user.setPassword(bCryptPasswordEncoder.encode(password));
+//        List<Role> roles = new ArrayList<>();
+//        roles.add(roleRepo.findById(2L).get());
+//        user.setRoles(roles);
+//        request.login(user.getEmail(), password);
+//        return "redirect:/";
+//    }
+
     @PostMapping("/register")
-    public String registerPost(@ModelAttribute("user") User user, HttpServletRequest request) throws ServletException{
-        String password = user.getPassword();
-        user.setPassword(bCryptPasswordEncoder.encode(password));
-        List<Role> roles = new ArrayList<>();
-        roles.add(roleRepo.findById(2L).get());
-        user.setRoles(roles);
-        request.login(user.getEmail(), password);
-        return "redirect:/";
+    public String saveUser(Model model, HttpServletRequest request, @ModelAttribute UserDto userDto) {
+        if (userService.isInvalidUser(userDto)) {
+            String errors = userService.invalidUser(userDto);
+
+            model.addAttribute("validationErrors", errors);
+
+            return "register";
+        }
+
+        return eventsWithCheckbox(request, userDto);
     }
 
+    private String eventsWithCheckbox(HttpServletRequest request, @ModelAttribute UserDto userDto) {
+        if (request.getParameter("isUserCheck") != null) {
+
+            userService.save(userDto);
+
+            return "redirect:/login";
+        } else {
+            return "checkboxError";
+        }
+    }
 }
