@@ -11,7 +11,6 @@ public class ProductDto {
     private double price;
     private String description;
     private String imageName;
-//    private byte[] imageName;
     private int currentQuantity;
     private boolean isActive;
 }
