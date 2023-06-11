@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
-    <link rel="stylesheet" href="src/main/resources/static/css/normolize.css">
-    <link rel="stylesheet" href="src/main/resources/static/css/main.css">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
     <header class="header">
         <nav>
-            <a href="/src/main/resources/templates/products.html" th:href="@{/admin/products}">Products</a>
-            <a href="/src/main/resources/templates/productsAdd.html" th:href="@{/admin/products/add}" class="btn btn-primary">Add Product</a>
+            <a href="products.html" th:href="@{/admin/products}">Products</a>
+            <a href="productsAdd.html" th:href="@{/admin/products/add}" class="btn btn-primary">Add Product</a>
         </nav>
     </header>
 
@@ -29,8 +29,7 @@
                         <th scope="col">Product name</th>
                         <th scope="col">Category</th>
                         <th scope="col">Current quantity</th>
-                        <th scope="col">Active</th>
-
+                        <th scope="col">Status</th>
                         <th scope="col">Preview</th>
                         <th scope="col">Delete</th>
                         <th scope="col">Update</th>
@@ -41,8 +40,13 @@
                         <th scope="row" th:text="${iStat.index + 1}">1</th>
                         <td th:text="${product.name}">Larry</td>
                         <td th:text="${product.category.name}">Larry</td>
-                        <td th:value="${product.currentQuantity}">1</td>
-                        <td th:text="${product.active} ? 'ACTIVE' : 'RETIRED'" />
+                        <td th:text="${product.currentQuantity}">1</td>
+                        <td><span th:if="${product.active}">Yes</span></td>
+                        <td><span th:if="not ${product.active}">No</span></td>
+
+<!--                        <td><span th:if="${product.isActive()}">Yes</span></td>-->
+<!--                        <span th:if="not ${isCold}">It's warm</span>-->
+<!--                        <td th:text="${product.active}" />-->
                         <td><img src="#" height="100px" width="100px" th:src="@{${'/productImages/' +product.imageName}}"></td>
             <!--            <td><img src="#" height="100px" width="100px" th:src="${'data:image/jpeg;charset=utf-8;base64,' + images.get(product.imageName)}"></td>-->
         

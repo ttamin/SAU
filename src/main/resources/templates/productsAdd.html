@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Products</title>
-    <link rel="stylesheet" href="src/main/resources/static/css/normolize.css">
-    <link rel="stylesheet" href="src/main/resources/static/css/main.css">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
     <header class="header">
         <nav>
-            <a href="/src/main/resources/templates/products.html" th:href="@{/admin/products}">Products</a>
-            <a href="/src/main/resources/templates/productsAdd.html" th:href="@{/admin/products/add}" class="btn btn-primary">Add Product</a>
+            <a href="products.html" th:href="@{/admin/products}">Products</a>
+            <a href="productsAdd.html" th:href="@{/admin/products/add}" class="btn btn-primary">Add Product</a>
         </nav>
     </header>
 
@@ -42,25 +42,43 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Current Quantity</label>
+                        <input type="number" class="four-control" required th:field="*{currentQuantity}" id="currentQuantity" name="currentQuantity"
+                               placeholder="Current Quantity">
+                    </div>
+                    <div class="form-group">
+<!--                        <label>Active</label>-->
+<!--                        <input type="checkbox" checked />-->
+<!--                        <input type="checkbox" />-->
+
+<!--                            <label >Is Active?</label>-->
+<!--                            <span aria-hidden="true">No</span>-->
+<!--                            <input type="range" max="1" required th:checked="*{isActive()}" id="status" name="status">-->
+<!--                            <span aria-hidden="true">Yes</span>-->
+
+<!--                        <input type="checkbox" required th:value="*{isActive()}" id="status" name="status"/>-->
+                        <label><input type="checkbox" name="active" th:checked="${productDto.active}"> Active</label>
+                    </div>
+                    <div class="form-group">
                         <label>Price</label>
-                        <input type="number" class="form-control" required th:field="*{price}" id="product.price" name="price"
+                        <input type="number" class="form-control" required th:field="*{price}" id="price" name="price"
                             placeholder="Price">
                     </div>
                     <div class="form-group">
                         <label>Product Description</label>
-                        <textarea class="form-control" rows="5" th:field="*{description}" name="description" id="product.description"></textarea>
+                        <textarea class="form-control" rows="5" th:field="*{description}" name="description" id="description"></textarea>
                     </div>
                 </div>
                 <div class="col-sm-5">
                     <p>Product Image</p>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="productImage" accept="image/svg+xml, image/jpeg, image/png" id="productImage"/>
+                        <input type="file" class="custom-file-input" name="productImage" accept="image/svg+xml, image/jpeg, image/png" />
                         <label>Choose file</label>
                     </div>
                     <div class="form-group">
                         <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/productImages/'+productDto.imageName}}">
                     </div>
-<!--                    <input type="hidden" name="imgName" th:value="${productDto.imageName}">-->
+                    <input type="hidden" name="imgName" th:value="${productDto.imageName}">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>

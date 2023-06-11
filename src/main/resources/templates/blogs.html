@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header class="header">
+    <nav>
+        <a href="blogs.html" th:href="@{/admin/blogs}">Blogs</a>
+        <a href="blogsAdd.html" th:href="@{/admin/blogs/add}" class="btn btn-primary">Add Blog</a>
+    </nav>
+</header>
+
+<section th:insert="blocks/section :: section"></section>
+
+
+<main class="main">
+    <div class="container">
+        <table class="table">
+            <thead class="thead-light"><!--Groups the header content in a table-->
+            <tr><!-- Defines a row in a table -->
+                <th scope="col">SN</th><!-- Defines a header cell in a table -->
+                <th scope="col">Blog name</th>
+                <th scope="col">Text</th>
+                <th scope="col">Preview</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+            </tr>
+            </thead>
+            <tbody><!-- Groups the body content in a table -->
+            <tr th:each="blog, iStat : ${blogs}">
+                <th scope="row" th:text="${iStat.index + 1}">1</th>
+                <td th:text="${blog.name}">Larry</td>
+                <td th:text="${blog.getFulltext}">Larry Larry</td>
+                <td><img src="#" height="100px" width="100px" th:src="@{${'/blogImages/' +blog.imgName}}"></td>
+                <td><a href="#" th:href="@{/blogs/delete/{id}(id=${blog.id})}" class="btn btn-danger">Delete</a> </td>
+                <td><a href="#" th:href="@{/blogs/update/{id}(id=${blog.id})}" class="btn btn-warning">Update</a> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

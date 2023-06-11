@@ -1,8 +1,11 @@
 package com.example.sau.contoller;
 
+import com.example.sau.dto.BlogDto;
 import com.example.sau.dto.ProductDto;
+import com.example.sau.model.Blog;
 import com.example.sau.model.Category;
 import com.example.sau.model.Product;
+import com.example.sau.service.BlogService;
 import com.example.sau.service.CategoryService;
 import com.example.sau.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +25,15 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    public static String uploadDir = System.getProperty("user.dir") +"/src/main/resources/static/productImages";
+    @Autowired
+    ProductService productService;
+
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    BlogService blogService;
     @GetMapping("/categories")
     public String getCategories(Model model){
         model.addAttribute("categories", categoryService.getAllCategory());
@@ -59,11 +68,6 @@ public class AdminController {
             return "404";
     }
 
-    public static String uploadDir = System.getProperty("user.dir") +"/src/main/resources/static/productImages";
-    @Autowired
-    ProductService productService;
-//    @Autowired
-//    CategoryService categoryService;
 
     @GetMapping("/products")
     public String products(Model model){
@@ -125,5 +129,60 @@ public class AdminController {
 
     }
 
+
+    @GetMapping("/blogs")
+    public String blogs(Model model){
+        model.addAttribute("blogs", blogService.getAllBlogs());
+        return "blogs";
+    }
+
+    @GetMapping("/blogs/add")
+    public String getBlogAdd(Model model){
+        model.addAttribute("blogs", new BlogDto());
+        return "blogsAdd";
+    }
+
+    @PostMapping("/blogs/add")
+    public String postProductAdd(@ModelAttribute("blogDto") BlogDto blogDto,
+                                 @RequestParam("blogImage") MultipartFile file,
+                                 @RequestParam("imgName") String imgName) throws IOException {
+        Blog blog = new Blog();
+        blog.setId(blogDto.getId());
+        blog.setName(blogDto.getName());
+        blog.setFulltext(blogDto.getFulltext());
+        String imageUUID;
+        if(!file.isEmpty()){
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        } else {
+            imageUUID=imgName;
+        }
+        blog.setImageName(imageUUID);
+        blogService.addBlog(blog);
+        return "redirect:/admin/blogs";
+    }
+
+
+    @GetMapping("/blogs/delete/{id}")
+    public String deleteBlog(@PathVariable long id){
+        blogService.removeBlogById(id);
+        return "redirect:/admin/blogs";
+
+    }
+
+    @GetMapping("/blogs/update/{id}")
+    public String updateBlog(@PathVariable long id, Model model) {
+        Blog blog = blogService.getBlogById(id).get();
+        BlogDto blogDto = new BlogDto();
+        blogDto.setId(blog.getId());
+        blogDto.setName(blog.getName());
+        blogDto.setFulltext(blog.getFulltext());
+        blogDto.setImageName(blog.getImageName());
+
+        model.addAttribute("blogDto", blogDto);
+
+        return "blogsAdd";
+    }
 
 }

@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories</title>
-    <link rel="stylesheet" href="src/main/resources/static/css/normolize.css">
-    <link rel="stylesheet" href="src/main/resources/static/css/main.css">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
@@ -27,6 +27,7 @@
                     <tr>
                         <th scope="col">SN</th>
                         <th scope="col">Category name</th>
+                        <th scope="col">Active</th>
                         <th scope="col">Delete</th>
                         <th scope="col">Update</th>
                     </tr>
@@ -36,8 +37,10 @@
               <tr th:each="category, iStat : ${categories}" >
                 <th scope="row" th:text="${iStat.index + 1}">1</th>
                 <td th:text="${category.name}">Larry</td>
-                  <td th:text="${category.active} ? 'ACTIVE' : 'RETIRED'" />
+<!--                  <td th:text="${category.active} ? 'NO' : 'YES'" />-->
 
+                  <td><span th:if="${category.active}">Yes</span></td>
+                  <td><span th:if="not ${category.active}">No</span></td>
                   <td th></td>
                 <td><a href="#" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a> </td>
                 <td><a href="#" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a> </td>

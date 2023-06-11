@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Categories</title>
-    <link rel="stylesheet" href="src/main/resources/static/css/normolize.css">
-    <link rel="stylesheet" href="src/main/resources/static/css/main.css">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
@@ -30,6 +30,11 @@
                         <label>Name</label>
                         <input type="text" class="form-control" required th:field="*{name}" name="name">
     
+                    </div>
+                    <div class="form-control">
+                        <label>
+                            <input type="checkbox" name="active" th:checked="*{isActive()}"> Active
+                        </label>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

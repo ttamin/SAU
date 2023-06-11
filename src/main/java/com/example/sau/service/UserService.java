@@ -5,7 +5,7 @@ import com.example.sau.exception.UserNotExistsException;
 import com.example.sau.model.User;
 import com.example.sau.repository.UserRepo;
 import com.example.sau.service.impl.IUserService;
-import com.example.sau.util.IUserConverter;
+//import com.example.sau.util.IUserConverter;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService implements IUserService{
     private final UserRepo userRepo;
-    private final IUserConverter userMapper;
+//    private final IUserConverter userMapper;
 
     private static final Logger LOGGER = LogManager.getLogger(IUserService.class.getName());
 
@@ -39,15 +39,15 @@ public class UserService implements IUserService{
 //        return userRepo.save(user);
 //    }
 
-    @Override
-    @Transactional
-    public void save(UserDto userDto) {
-        User user = userMapper.fromUserDto(userDto);
-
-        userRepo.save(user);
-
-        LOGGER.info("New user : {}", user);
-    }
+//    @Override
+//    @Transactional
+//    public void save(UserDto userDto) {
+//        User user = userMapper.fromUserDto(userDto);
+//
+//        userRepo.save(user);
+//
+//        LOGGER.info("New user : {}", user);
+//    }
 
     @Override
     public List<User> getAllUsers() {

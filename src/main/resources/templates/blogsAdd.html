@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog</title>
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header class="header">
+    <nav>
+        <a href="blogs.html" th:href="@{/admin/blogs}">Blogs</a>
+        <a href="blogsAdd.html" th:href="@{/admin/blogs/add}" class="btn btn-primary">Add Blog</a>
+    </nav>
+</header>
+
+<section th:insert="blocks/section :: section"></section>
+
+<main class="main">
+    <div class="container">
+        <h3>Add a new Blog</h3>
+        <form th:action="@{/admin/blogs/add}" method="post" th:object="${blogDto}" enctype="multipart/form-data">
+            <div class="row">
+                <input type="hidden" name="blogid" id="blogid" th:field="*{id}" >
+<!--                <input type="hidden" th:value="*{id}" th:attr="name='blogId'"/>-->
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" required th:field="*{name}" name="name"
+                               placeholder="Enter name">Name
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="fulltext">Blog Text</label>
+                    <textarea class="form-control" rows="5" required th:field="*{fulltext}" name="fulltext" id="fulltext"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <p>Blog Image</p>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="blogImage" accept="image/svg+xml, image/jpeg, image/png" />
+                    <label>Choose file</label>
+                </div>
+                <div class="form-group">
+                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/blogImages/'+blogDto.imageName}}">
+                </div>
+                <input type="hidden" name="imgName" th:value="${blogDto.imageName}">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        <script>
+            function readURL(input){
+                if(input.files && input.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function (e){
+                        $("#imgPreview").attr('src', e.target.result).width(100).height(100);
+                    }
+                    reader.readAsDataURL(input.files[0])
+                }
+            }
+            $('#productImage').change(function (){
+                readURL(this);
+            });
+            $(".custom-file-input").on("change", function (){
+                var fileName = $(this).var().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    </div>
+</main>
+
+
+</body>
+
+</html>
