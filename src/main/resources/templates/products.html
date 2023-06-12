@@ -49,12 +49,12 @@
 <!--                        <td th:text="${product.active}" />-->
                         <td><img src="#" height="100px" width="100px" th:src="@{${'/productImages/' +product.imageName}}"></td>
             <!--            <td><img src="#" height="100px" width="100px" th:src="${'data:image/jpeg;charset=utf-8;base64,' + images.get(product.imageName)}"></td>-->
-        
+
                         <td><a href="#" th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a> </td>
                         <td><a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}" class="btn btn-warning">Update</a> </td>
                     </tr>
                 </tbody>
-            </table> 
+            </table>
         </div>
     </main>
 </body>

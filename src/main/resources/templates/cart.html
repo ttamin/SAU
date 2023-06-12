@@ -1,10 +1,49 @@
+<!-- cart.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Cart</title>
 </head>
 <body>
+<h1>Cart</h1>
 
+<p>Number of items in cart: <span th:text="${cart.totalItems}"></span></p>
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="item, itemStat : ${cart.cartItems}">
+        <td>
+            <img th:src="@{'/images/' + ${item.product.imageName}}" alt="Product Image" width="100px">
+            <span th:text="${item.product.name}"></span>
+        </td>
+        <td th:text="${item.unitPrice}"></td>
+        <td>
+            <input type="number" min="1" th:value="${item.quantity}" th:attr="data-index=${itemStat.index}" onchange="updateQuantity(this)">
+        </td>
+        <td th:text="${item.unitPrice * item.quantity}"></td>
+        <td>
+            <a th:href="@{'/cart/removeProduct/' + ${itemStat.index}}"">Remove</a>
+        </td>
+    </tr>
+</table>
+
+<h2>Total: <span th:text="${cart.totalPrice}"></span></h2>
+
+<a href="/checkout">Checkout</a>
+
+<script>
+    function updateQuantity(input) {
+        var index = input.getAttribute('data-index');
+        var quantity = input.value;
+        window.location.href = '/cart/updateQuantity/' + index + '?quantity=' + quantity;
+    }
+</script>
 </body>
 </html>

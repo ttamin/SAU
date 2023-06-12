@@ -90,6 +90,8 @@ public class AdminController {
         product.setId(productDto.getId());
         product.setName(productDto.getName());
         product.setCategory(categoryService.getCategoryById(productDto.getCategoryId()).get());
+        product.setCurrentQuantity(productDto.getCurrentQuantity());
+        product.setActive(product.isActive());
         product.setPrice(productDto.getPrice());
         product.setDescription(productDto.getDescription());
         String imageUUID;
@@ -118,6 +120,8 @@ public class AdminController {
         productDto.setId(product.getId());
         productDto.setName(product.getName());
         productDto.setCategoryId(product.getCategory().getId());
+        productDto.setCurrentQuantity(product.getCurrentQuantity());
+        productDto.setActive(product.isActive());
         productDto.setPrice(product.getPrice());
         productDto.setDescription(product.getDescription());
         productDto.setImageName(product.getImageName());
