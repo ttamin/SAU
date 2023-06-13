@@ -19,12 +19,11 @@ public class CartItem {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Cart cart;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
     private int quantity;
     private double subTotal;

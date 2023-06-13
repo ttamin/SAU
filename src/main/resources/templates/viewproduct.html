@@ -6,12 +6,21 @@
     <title>Title</title>
 </head>
 <body>
+<nav>
+    <a class="nav-link" th:href="@{/static}" href="#">home</a>
+    <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
+
+    <li><a href="/cart">Cart <span th:text="${cartCounter}"></span></a></li>
+</nav>
 <div class="container">
     <h5 class="card-title" th:text="${product.name}"></h5>
     <h4><span th:text="${product.price}"></span> </h4>
     <p th:text="${product.description}">This drink very strong</p>
     <img src="" height="150px" width="150px" th:src="@{${'/productImages/'+product.imageName}}">
-
+    <form th:action="@{/cart/add}" method="post">
+        <input type="hidden" name="productId" th:value="${product.id}">
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
 </div>
 </body>
 </html>

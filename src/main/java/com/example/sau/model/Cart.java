@@ -19,7 +19,7 @@ public class Cart {
     @Column(name = "cart_id")
     private Long id;
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     private double totalPrice;

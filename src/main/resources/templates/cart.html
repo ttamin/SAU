@@ -8,7 +8,7 @@
 <body>
 <h1>Cart</h1>
 
-<p>Number of items in cart: <span th:text="${cart.totalItems}"></span></p>
+<p>Number of items in cart: <span th:text="${cartCounter}"></span></p>
 
 <table>
     <tr>
@@ -18,32 +18,38 @@
         <th>Subtotal</th>
         <th>Action</th>
     </tr>
-    <tr th:each="item, itemStat : ${cart.cartItems}">
+    <tr th:each="item, itemStat : ${cart}">
         <td>
             <img th:src="@{'/images/' + ${item.product.imageName}}" alt="Product Image" width="100px">
             <span th:text="${item.product.name}"></span>
         </td>
-        <td th:text="${item.unitPrice}"></td>
+        <td th:text="${item.subTotal}"></td>
+<!--        <td>-->
+<!--            <input type="number" min="1" th:value="${item.quantity}" th:attr="data-index=${itemStat.index}" onchange="updateQuantity(this)">-->
+<!--        </td>-->
+        <td th:text="${item.subTotal * item.quantity}"></td>
         <td>
-            <input type="number" min="1" th:value="${item.quantity}" th:attr="data-index=${itemStat.index}" onchange="updateQuantity(this)">
+            <a th:href="@{'/cart/removeProduct/' + ${itemStat.index}}">Remove</a>
         </td>
-        <td th:text="${item.unitPrice * item.quantity}"></td>
-        <td>
-            <a th:href="@{'/cart/removeProduct/' + ${itemStat.index}}"">Remove</a>
-        </td>
+        <form th:action="@{/cart/updateQuantity}" method="post">
+            <input type="hidden" name="productId" th:value="${item.product.id}" />
+            <input type="number" min="1" name="quantity" th:value="${item.quantity}" />
+            <button type="submit">Update</button>
+        </form>
+
     </tr>
 </table>
 
-<h2>Total: <span th:text="${cart.totalPrice}"></span></h2>
+<h2>Total: <span th:text="${total}"></span></h2>
 
 <a href="/checkout">Checkout</a>
 
-<script>
-    function updateQuantity(input) {
-        var index = input.getAttribute('data-index');
-        var quantity = input.value;
-        window.location.href = '/cart/updateQuantity/' + index + '?quantity=' + quantity;
-    }
-</script>
+<!--<script>-->
+<!--    function updateQuantity(input) {-->
+<!--        var index = input.getAttribute('data-index');-->
+<!--        var quantity = input.value;-->
+<!--        window.location.href = '/cart/updateQuantity/' + index + '?quantity=' + quantity;-->
+<!--    }-->
+<!--</script>-->
 </body>
 </html>

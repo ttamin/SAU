@@ -16,12 +16,12 @@ public class Product {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
     private double price;
     private String description;
     private String imageName;
     private int currentQuantity;
-    @Column(columnDefinition = "true")
+//    @Column(columnDefinition = "true")
     private boolean isActive;
 }

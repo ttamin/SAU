@@ -25,8 +25,23 @@ public class ShoppingCartController {
 
         @Autowired
         CartItemService cartItemService;
+        @GetMapping("/cart")
+        public String cartGet(Model model) {
+            int totalItems = calculateTotalItems();
+            model.addAttribute("cartCounter", totalItems);
+//            model.addAttribute("cartCounter", GlobalData.cart.size());
+            model.addAttribute("total", calculateTotal());
+            model.addAttribute("cart", GlobalData.cart);
+            return "cart";
+        }
 
-        @GetMapping("/addToCart/{id}")
+    private int calculateTotalItems() {
+        return GlobalData.cart.stream()
+                .mapToInt(CartItem::getQuantity)
+                .sum();
+    }
+
+        @GetMapping("/cart/addT/{id}")
         public String addToCart(@PathVariable long id) {
             Optional<Product> productOptional = productService.getProductById(id);
             if (productOptional.isPresent()) {
@@ -47,44 +62,62 @@ public class ShoppingCartController {
             return "redirect:/shop";
         }
 
-        @PostMapping("/cart/updateQuantity")
-        public String updateCartItemQuantity(@RequestParam("productId") long productId, @RequestParam("quantity") int quantity) {
-            // Поиск элемента корзины по productId
-            CartItem cartItem = cartItemService.getCartItemByProductId(productId);
+    @PostMapping("/cart/add")
+    public String addItemToCart(@RequestParam("productId") long productId) {
+        Optional<Product> productOptional = productService.getProductById(productId);
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
 
-            if (cartItem != null) {
-                // Обновление количества товара
-                cartItem.setQuantity(quantity);
+            // Create a new cart item
+            CartItem cartItem = new CartItem();
+            cartItem.setProduct(product);
+            cartItem.setQuantity(1);
+            cartItem.setSubTotal(product.getPrice());
+            cartItem.setImageName(product.getImageName());
 
-                // Обновление цены элемента корзины
-                cartItem.setSubTotal(cartItem.getProduct().getPrice() * quantity);
-            }
-
-            return "redirect:/cart";
+            // Add the cart item to the cart
+            GlobalData.cart.add(cartItem);
         }
-    @GetMapping("/cart/removeProduct/{index}")
-    public String cartItemRemove(@PathVariable int index) {
-        GlobalData.cart.remove(index);
+
+        return "redirect:/shop";
+    }
+
+
+    @PostMapping("/cart/updateQuantity")
+    public String updateCartItemQuantity(@RequestParam("productId") long productId, @RequestParam("quantity") int quantity) {
+        Optional<CartItem> cartItemOptional = cartItemService.getCartItemByProductId(productId);
+
+        if (cartItemOptional.isPresent()) {
+            CartItem cartItem = cartItemOptional.get();
+
+            // Обновление количества товара
+            cartItem.setQuantity(quantity);
+
+            // Обновление цены элемента корзины
+            cartItem.setSubTotal(cartItem.getProduct().getPrice() * quantity);
+        }
+
         return "redirect:/cart";
     }
 
-    @GetMapping("/checkout")
-    public String checkout(Model model) {
-        model.addAttribute("total", calculateTotal());
-        return "checkout";
-    }
-    @GetMapping("/cart")
-    public String cartGet(Model model) {
-        model.addAttribute("cartCounter", GlobalData.cart.size());
-        model.addAttribute("total", calculateTotal());
-        model.addAttribute("cart", GlobalData.cart);
-        return "cart";
-    }
 
-    private double calculateTotal() {
-        return GlobalData.cart.stream().mapToDouble(CartItem::getSubTotal).sum();
-    }
-        // Остальные методы контроллера
+        @GetMapping("/cart/removeProduct/{index}")
+        public String cartItemRemove(@PathVariable int index) {
+            GlobalData.cart.remove(index);
+            return "redirect:/cart";
+        }
+
+        @GetMapping("/checkout")
+        public String checkout(Model model) {
+            model.addAttribute("total", calculateTotal());
+            return "checkout";
+        }
+
+
+        private double calculateTotal() {
+            return GlobalData.cart.stream().mapToDouble(CartItem::getSubTotal).sum();
+        }
+            // Остальные методы контроллера
 
 
 }

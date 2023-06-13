@@ -17,9 +17,8 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "category_id")
     private Long id;
     private String name;
-    @Column(columnDefinition = "true")
+//    @Column(columnDefinition = "true")
     private boolean isActive;
 }

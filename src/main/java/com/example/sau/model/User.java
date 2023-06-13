@@ -40,6 +40,6 @@ public class User {
 //    private String city;
 @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 private Cart cart;
-    public User(User user) {
-    }
+//    public User(User user) {
+//    }
 }
