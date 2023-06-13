@@ -36,9 +36,9 @@
                 <th scope="row" th:text="${iStat.index + 1}">1</th>
                 <td th:text="${blog.name}">Larry</td>
                 <td th:text="${blog.getFulltext}">Larry Larry</td>
-                <td><img src="#" height="100px" width="100px" th:src="@{${'/blogImages/' +blog.imgName}}"></td>
-                <td><a href="#" th:href="@{/blogs/delete/{id}(id=${blog.id})}" class="btn btn-danger">Delete</a> </td>
-                <td><a href="#" th:href="@{/blogs/update/{id}(id=${blog.id})}" class="btn btn-warning">Update</a> </td>
+                <td><img src="#" height="100px" width="100px" th:src="@{${'/blogImages/' +blog.imageName}}"></td>
+                <td><a href="#" th:href="@{/admin/blogs/delete/{id}(id=${blog.id})}" class="btn btn-danger">Delete</a> </td>
+                <td><a href="#" th:href="@{/admin/blogs/update/{id}(id=${blog.id})}" class="btn btn-warning">Update</a> </td>
             </tr>
             </tbody>
         </table>

@@ -24,7 +24,7 @@ public class CartItem {
     private Cart cart;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private Product product;
     private int quantity;
     private double subTotal;

@@ -23,7 +23,7 @@
         <h3>Add a new Blog</h3>
         <form th:action="@{/admin/blogs/add}" method="post" th:object="${blogDto}" enctype="multipart/form-data">
             <div class="row">
-                <input type="hidden" name="blogid" id="blogid" th:field="*{id}" >
+                <input type="hidden" name="id" id="blogid" th:value="${blogDto.id}" >
 <!--                <input type="hidden" th:value="*{id}" th:attr="name='blogId'"/>-->
                 <div class="form-group">
                     <label>

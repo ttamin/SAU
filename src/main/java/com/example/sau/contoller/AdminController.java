@@ -91,7 +91,7 @@ public class AdminController {
         product.setName(productDto.getName());
         product.setCategory(categoryService.getCategoryById(productDto.getCategoryId()).get());
         product.setCurrentQuantity(productDto.getCurrentQuantity());
-        product.setActive(product.isActive());
+        product.setActive(productDto.isActive());
         product.setPrice(productDto.getPrice());
         product.setDescription(productDto.getDescription());
         String imageUUID;
@@ -142,7 +142,7 @@ public class AdminController {
 
     @GetMapping("/blogs/add")
     public String getBlogAdd(Model model){
-        model.addAttribute("blogs", new BlogDto());
+        model.addAttribute("blogDto", new BlogDto());
         return "blogsAdd";
     }
 

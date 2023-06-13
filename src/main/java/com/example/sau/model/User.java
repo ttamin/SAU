@@ -38,6 +38,8 @@ public class User {
     private List<Role> roles;
 //    private String address;
 //    private String city;
+@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+private Cart cart;
     public User(User user) {
     }
 }
