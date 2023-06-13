@@ -31,6 +31,8 @@ public class AdminController {
 
     @Autowired
     CategoryService categoryService;
+    public static String uplDir = System.getProperty("user.dir") +"/src/main/resources/static/blogImage";
+
 
     @Autowired
     BlogService blogService;
@@ -157,7 +159,7 @@ public class AdminController {
         String imageUUID;
         if(!file.isEmpty()){
             imageUUID = file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+            Path fileNameAndPath = Paths.get(uplDir, imageUUID);
             Files.write(fileNameAndPath, file.getBytes());
         } else {
             imageUUID=imgName;
