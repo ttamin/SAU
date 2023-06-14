@@ -8,7 +8,7 @@ body{
     grid-template-rows: 90px 1fr;/* ширина header */
 }
 
- /*header */
+/*header */
 
 .header{
     background-color: #ffffff;
@@ -57,10 +57,10 @@ body{
     color: #1E79AB;
 } */
 
- .sidebar ul a:active{
+.sidebar ul a:active{
     background: #D7F1FF;
     color: #1E79AB;
-} 
+}
 
 
 /* main */
@@ -111,7 +111,7 @@ tbody tr th{
     font-size: 28px;
     color: #003B5C;
     padding: 54px 15px;
-    text-align: center; 
+    text-align: center;
 }
 
 tbody tr td a{
