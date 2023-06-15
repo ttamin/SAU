@@ -17,7 +17,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Role {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private int id;
+    private Long id;
     @Column(nullable = false, unique = true)
     private String name;
     @ManyToMany(mappedBy = "roles")

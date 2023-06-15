@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:tn="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,21 +20,29 @@
     <main class="login-register-form">
         <div class="container">
             <h1>Личный кабинет</h1>
-            <form action="/login" method="post">
+            <form th:action="@{/login}" method="post">
+                <div th:if="${param.error}" class="alert alert-danger">
+                    Invalid username & Password
+                </div>
+
+                <div th:if="${param.logout==null}" class="alert alert-success">
+                    Logout Sucessfully
+                </div>
                 <table>
                     <tr>
-                        <td><input class="login-input" type="text" name="login" required placeholder="Электронная почта" required minlength="4" maxlength="150" size="44"></td>
+                        <td><input class="login-input" type="text" name="username" required placeholder="Username" minlength="4" maxlength="150" size="44"></td>
                     </tr>
                     <tr>
-                        <td> <input class="login-input" type="password" name="password" required placeholder="Пароль" required minlength="8" maxlength="15" size="44"></td>
+                        <td> <input class="login-input" type="password" name="password" required placeholder="Пароль" minlength="8" maxlength="15" size="44"></td>
                     </tr>
                 </table><br/>
                 
             </form>
-            <h3><a href="/SAU/src/main/resources/templates/forgot-pass.html">Забыли пароль?</a></h3>
+            <h3><a href="/templates/forgot-pass.html">Забыли пароль?</a></h3>
             <section class="login-btns">
-                <a href="#">Войти</a>
-                <span class="register-btn"><a href="#" th:href="@{/register}">Регистрация</a></span>
+                <button type="submit" class="btn btn-success offset-md-5">Войти</button>
+<!--                <a href="/admin/">Войти</a>-->
+                <span class="register-btn"><a href="#" th:href="@{/users/register}">Регистрация</a></span>
             </section>
         </div>
     </main>

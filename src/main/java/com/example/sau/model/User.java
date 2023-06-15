@@ -39,4 +39,6 @@ public class User {
 @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 private Cart cart;
 
+    public User(Long id, String username, String password, String email) {
+    }
 }
