@@ -5,7 +5,7 @@ import com.example.sau.model.Blog;
 import java.util.List;
 import java.util.Optional;
 
-public interface IBlogService {
+public interface BlogService {
     public List<Blog> getAllBlogs();
     public void addBlog(Blog blog);
     public void removeBlogById(long id);

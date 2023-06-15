@@ -6,7 +6,7 @@ import com.example.sau.model.Product;
 import java.math.BigDecimal;
 import java.util.Map;
 
-public interface IShoppingCartService {
+public interface ShoppingCartService {
     void addProduct(Product product);
     void removeProduct(Product product);
 

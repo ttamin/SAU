@@ -2,7 +2,7 @@ package com.example.sau.service;
 
 import com.example.sau.model.Product;
 import com.example.sau.repository.ProductRepo;
-import com.example.sau.service.impl.IProductService;
+import com.example.sau.service.impl.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 
-public class ProductService implements IProductService {
+public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepo productRepo;
     @Override

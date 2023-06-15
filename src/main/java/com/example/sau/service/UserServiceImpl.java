@@ -4,7 +4,7 @@ import com.example.sau.dto.UserDto;
 import com.example.sau.exception.UserNotExistsException;
 import com.example.sau.model.User;
 import com.example.sau.repository.UserRepo;
-import com.example.sau.service.impl.IUserService;
+import com.example.sau.service.impl.UserService;
 //import com.example.sau.util.IUserConverter;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,11 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
-public class UserService implements IUserService{
+public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
 //    private final IUserConverter userMapper;
 
-    private static final Logger LOGGER = LogManager.getLogger(IUserService.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(UserService.class.getName());
 
     private static final String FIELD_IS_EMPTY = "Login or password shouldn't be empty";
     private static final String INVALID_FIELD = "Login or password shouldn't be less than 4 symbols";

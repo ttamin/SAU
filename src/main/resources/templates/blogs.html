@@ -25,6 +25,7 @@
             <tr><!-- Defines a row in a table -->
                 <th scope="col">SN</th><!-- Defines a header cell in a table -->
                 <th scope="col">Blog name</th>
+                <th scope="col">Blog anons</th>
                 <th scope="col">Text</th>
                 <th scope="col">Preview</th>
                 <th scope="col">Delete</th>
@@ -35,6 +36,7 @@
             <tr th:each="blog, iStat : ${blogs}">
                 <th scope="row" th:text="${iStat.index + 1}">1</th>
                 <td th:text="${blog.name}">Larry</td>
+                <td th:text="${blog.anons}">Larry anons</td>
                 <td th:text="${blog.getFulltext}">Larry Larry</td>
                 <td><img src="#" height="100px" width="100px" th:src="@{${'/blogImages/' +blog.imageName}}"></td>
                 <td><a href="#" th:href="@{/admin/blogs/delete/{id}(id=${blog.id})}" class="btn btn-danger">Delete</a> </td>

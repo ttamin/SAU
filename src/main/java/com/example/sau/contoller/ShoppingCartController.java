@@ -2,16 +2,15 @@ package com.example.sau.contoller;
 
 import com.example.sau.global.GlobalData;
 import com.example.sau.model.CartItem;
+import com.example.sau.model.CustomerForm;
 import com.example.sau.model.Product;
-import com.example.sau.service.CartItemService;
-import com.example.sau.service.ProductService;
+import com.example.sau.service.CartItemServiceImpl;
+import com.example.sau.service.CustomerFormServiceImpl;
+import com.example.sau.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +20,16 @@ import java.util.Optional;
 public class ShoppingCartController {
 
         @Autowired
-        ProductService productService;
-
+        ProductServiceImpl productServiceImpl;
         @Autowired
-        CartItemService cartItemService;
+        CartItemServiceImpl cartItemService;
+        @Autowired
+        CustomerFormServiceImpl customerFormService;
+
         @GetMapping("/cart")
         public String cartGet(Model model) {
             int totalItems = calculateTotalItems();
             model.addAttribute("cartCounter", totalItems);
-//            model.addAttribute("cartCounter", GlobalData.cart.size());
             model.addAttribute("total", calculateTotal());
             model.addAttribute("cart", GlobalData.cart);
             return "cart";
@@ -43,17 +43,15 @@ public class ShoppingCartController {
 
         @GetMapping("/cart/addT/{id}")
         public String addToCart(@PathVariable long id) {
-            Optional<Product> productOptional = productService.getProductById(id);
+            Optional<Product> productOptional = productServiceImpl.getProductById(id);
             if (productOptional.isPresent()) {
                 Product product = productOptional.get();
 
-                // Создание нового элемента корзины
                 CartItem cartItem = new CartItem();
                 cartItem.setProduct(product);
-                cartItem.setQuantity(1); // Установка начального количества товара
+                cartItem.setQuantity(1);
                 cartItem.setSubTotal(product.getPrice());
                 cartItem.setImageName(product.getImageName());
-                // Добавление элемента корзины в корзину
                 List<CartItem> cartItems = new ArrayList<>();
                 cartItems.add(cartItem);
                 GlobalData.cart = cartItems;
@@ -62,62 +60,63 @@ public class ShoppingCartController {
             return "redirect:/shop";
         }
 
-    @PostMapping("/cart/add")
-    public String addItemToCart(@RequestParam("productId") long productId) {
-        Optional<Product> productOptional = productService.getProductById(productId);
-        if (productOptional.isPresent()) {
-            Product product = productOptional.get();
+        @PostMapping("/cart/add")
+        public String addItemToCart(@RequestParam("productId") long productId) {
+            Optional<Product> productOptional = productServiceImpl.getProductById(productId);
+            if (productOptional.isPresent()) {
+                Product product = productOptional.get();
 
-            // Create a new cart item
-            CartItem cartItem = new CartItem();
-            cartItem.setProduct(product);
-            cartItem.setQuantity(1);
-            cartItem.setSubTotal(product.getPrice());
-            cartItem.setImageName(product.getImageName());
+                CartItem cartItem = new CartItem();
+                cartItem.setProduct(product);
+                cartItem.setQuantity(1);
+                cartItem.setSubTotal(product.getPrice());
+                cartItem.setImageName(product.getImageName());
 
-            // Add the cart item to the cart
-            GlobalData.cart.add(cartItem);
+                GlobalData.cart.add(cartItem);
+            }
+
+            return "redirect:/shop";
         }
 
-        return "redirect:/shop";
-    }
 
+        @PostMapping("/cart/updateQuantity")
+        public String updateCartItemQuantity(@RequestParam("productId") long productId, @RequestParam("quantity") int quantity) {
+            Optional<CartItem> cartItemOptional = cartItemService.getCartItemByProductId(productId);
 
-    @PostMapping("/cart/updateQuantity")
-    public String updateCartItemQuantity(@RequestParam("productId") long productId, @RequestParam("quantity") int quantity) {
-        Optional<CartItem> cartItemOptional = cartItemService.getCartItemByProductId(productId);
+            if (cartItemOptional.isPresent()) {
+                CartItem cartItem = cartItemOptional.get();
 
-        if (cartItemOptional.isPresent()) {
-            CartItem cartItem = cartItemOptional.get();
+                cartItem.setQuantity(quantity);
 
-            // Обновление количества товара
-            cartItem.setQuantity(quantity);
+                cartItem.setSubTotal(cartItem.getProduct().getPrice() * quantity);
+            }
 
-            // Обновление цены элемента корзины
-            cartItem.setSubTotal(cartItem.getProduct().getPrice() * quantity);
-        }
-
-        return "redirect:/cart";
-    }
-
-
-        @GetMapping("/cart/removeProduct/{index}")
-        public String cartItemRemove(@PathVariable int index) {
-            GlobalData.cart.remove(index);
             return "redirect:/cart";
         }
 
-        @GetMapping("/checkout")
-        public String checkout(Model model) {
-            model.addAttribute("total", calculateTotal());
-            return "checkout";
-        }
+            @GetMapping("/cart/removeProduct/{index}")
+            public String cartItemRemove(@PathVariable int index) {
+                GlobalData.cart.remove(index);
+                return "redirect:/cart";
+            }
+
+            @GetMapping("/checkout")
+            public String checkout(Model model) {
+                model.addAttribute("customerForm", new CustomerForm());
+                model.addAttribute("total", calculateTotal());
+                return "checkout";
+            }
+
+            @PostMapping("/checkout")
+            public String checkoutSend(@ModelAttribute("customerForm") CustomerForm customerForm){
+                customerFormService.addCustomerForm(customerForm);
+                return "successfulPage";
+            }
 
 
-        private double calculateTotal() {
-            return GlobalData.cart.stream().mapToDouble(CartItem::getSubTotal).sum();
-        }
-            // Остальные методы контроллера
+            private double calculateTotal() {
+                return GlobalData.cart.stream().mapToDouble(CartItem::getSubTotal).sum();
+            }
 
 
-}
+    }

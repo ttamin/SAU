@@ -22,4 +22,5 @@ public class Blog {
     private String name;
     private String fulltext;
     private String imageName;
+    private String anons;
 }

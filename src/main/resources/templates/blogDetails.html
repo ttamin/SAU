@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h5 class="card-title" th:text="${blog.name}"></h5>
+    <td th:text="${blog.anons}">Larry anons</td>
+    <td th:text="${blog.getFulltext}">Larry Larry</td>
+
+    <td><img src="#" height="100px" width="100px" th:src="@{${'/blogImages/' +blog.imageName}}"></td>
+
+</div>
+</body>
+</html>

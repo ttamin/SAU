@@ -2,8 +2,7 @@ package com.example.sau.service;
 
 import com.example.sau.model.Category;
 import com.example.sau.repository.CategoryRepo;
-import com.example.sau.service.impl.ICategoryService;
-import com.fasterxml.jackson.annotation.OptBoolean;
+import com.example.sau.service.impl.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 
-public class CategoryService implements ICategoryService {
+public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryRepo categoryRepo;
     @Override

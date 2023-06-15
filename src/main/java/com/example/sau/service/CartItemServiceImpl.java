@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class CartItemService {
+public class CartItemServiceImpl {
     @Autowired
     CartItemRepo cartItemRepo;
     public Optional<CartItem> getCartItemByProductId(Long id) {

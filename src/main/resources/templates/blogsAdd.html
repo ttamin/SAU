@@ -11,7 +11,7 @@
 <body>
 <header class="header">
     <nav>
-        <a href="blogs.html" th:href="@{/admin/blogs}">Blogs</a>
+        <a href="blogs.html" th:href="@{/admin/blogs/main}">Blogs</a>
         <a href="blogsAdd.html" th:href="@{/admin/blogs/add}" class="btn btn-primary">Add Blog</a>
     </nav>
 </header>
@@ -31,6 +31,13 @@
                                placeholder="Enter name">Name
                     </label>
                 </div>
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" required th:field="*{anons}" name="anons"
+                               placeholder="Enter anons">Anons
+                    </label>
+                </div>
+
 
                 <div class="form-group">
                     <label for="fulltext">Blog Text</label>

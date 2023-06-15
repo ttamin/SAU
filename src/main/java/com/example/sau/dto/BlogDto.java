@@ -8,4 +8,6 @@ public class BlogDto {
     private String name;
     private String fulltext;
     private String imageName;
+    private String anons;
+
 }
