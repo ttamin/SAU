@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT SAU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
-<body>
 
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<main class="about-us-page">
+    <img src="/images/about-us-banner.svg" alt="" width="100%">
+    <div class="container">
+
+
+        <section class="about-us-farm">
+            <img src="/images/farm.svg" alt="">
+            <article>
+                <h2>Мы ценим и уважаем природу</h2>
+                <h3>Поэтому наша продукция основана на натуральных и экологически чистых компонентах. Мы стремимся сделать максимальный положительный вклад в окружающую среду. Также постоянно стремимся к высочайшему качеству продукции, используя только тщательно отобранные ингредиенты,
+                    которые отвечают нашим стандартам безопасности и эффективности.</h3>
+            </article>
+        </section>
+
+        <section class="about-us-product">
+            <article>
+                <h2>Миссия: оздоровительные напитки</h2>
+                <h3>SAU - напиток, который поддерживает ваше благополучие и восстанавливает естественное равновесие организма. Мы стремимся предоставить качественные и натуральные ингредиенты, чтобы помочь вам достичь оптимального здоровья и впитать в себя жизненные силы природы. Наша цель - вдохновлять
+                    людей на заботу о своем здоровье и создавать положительный вклад в их образ жизни.</h3>
+            </article>
+            <img src="/images/our-product.svg" alt="">
+        </section>
+
+        <section class="about-us-team">
+            <img src="/images/team.svg" alt="">
+            <article>
+                <h2>Наша команда</h2>
+                <h3>Мы поддерживаем уверенность в том, что каждый человек имеет право на здоровую и счастливую жизнь. Мы нацелены на то, чтобы вдохновить и помочь вам достичь
+                    лучшей версии себя и наслаждаться активным и сбалансированным образом жизни.</h3>
+            </article>
+        </section>
+
+        <section class="about-us-health">
+            <article>
+                <h2>Выбирая его</h2>
+                <h3>Вы выбираете здоровый и активный образ жизни, который поможет вам сохранить свое здоровье и наслаждаться жизнью в полной мере. Так что, не отказывайте себе в удовольствии!
+                    Попробуйте Сау прямо сейчас и наслаждайтесь неповторимым вкусом и пользой для вашего здоровья!</h3>
+            </article>
+            <img src="/images/health.svg" alt="">
+        </section>
+    </div>
+</main>
+
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
+
 </html>
