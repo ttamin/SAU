@@ -1,48 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAU REGISTER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
-    <div class = "container">
-        <div class="col-sm-6">
-            <h3>Sign Up Now</h3>
-            <p>Please fill out this to register</p>
-<!--            <h3><span class="has-error" th:text="${validationErrors}"></span></h3>-->
-            <form th:action="@{/register}" th:object="${user}" method="post">
+    <header th:insert="blocks/header :: header"></header>
 
-<!--            <form th:action="@{/register}" th:object="${com.example.sau.model.User}" method="post">-->
-                <div class="form-group">
-                    <label>First name</label>
-                    <input type="text"  id="firstName" autofocus="autofocus"
-                           class="form-control" required name="firstName" th:field="*{firstname}" >
-<!--                    <input type="text" name="firstName" id="firstName" required placeholder="Your Firstname" th:field="*{firstName}">-->
-                </div>
-                <div class="form-group">
-                    <label>Last name</label>
-                    <input type="text"  id="lastName" autofocus="autofocus"
-                           class="form-control" required name="lastName" th:field="*{lastname}" >
-                </div>
-                <div class="form-group">
-                    <label>Email address</label>
-                    <input type="text"  id="email" autofocus="autofocus"
-                           class="form-control" required name="email" th:field="*{email}" >
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password"  id="password" autofocus="autofocus"
-                           class="form-control" required name="password" th:field="*{password}" >
-                </div>
-                <input type="checkbox" name="isUserCheck" class="checkbox" id="checkbox" value="yes">
-                <label for="checkbox"> I agree with the terms of service</label>
-                <div>
-                    <button type="submit" class="btn btn-success">Register</button>
-                    <span>Registered already? <a href="/templates/login.html" th:href="@{/login}">Login here.</a></span>
-                </div>
-            </form>
+    <main class="login-register-form">
+        <div class = "container">
+            <div class="register-form">
+                <h1>Регистрация</h1>
+<!--                <h3>Please fill out this to register</h3>-->
+                <!--            <h3><span class="has-error" th:text="${validationErrors}"></span></h3>-->
+                <form th:action="@{/register}" th:object="${user}" method="post">
+                    <!--            <form th:action="@{/register}" th:object="${com.example.sau.model.User}" method="post">-->
+                    <div class="form-group">
+<!--                        <label>Имя</label>-->
+                        <input type="text"  id="firstName" autofocus="autofocus" required placeholder="Имя" minlength="3" maxlength="19" size="44"
+                               class="form-control" required name="firstName" th:field="*{firstname}" >
+                        <!--                    <input type="text" name="firstName" id="firstName" required placeholder="Your Firstname" th:field="*{firstName}">-->
+                    </div>
+                    <div class="form-group">
+<!--                        <label>Фамилия</label>-->
+                        <input type="text"  id="lastName" autofocus="autofocus" required placeholder="Фамилия" minlength="3" maxlength="10" size="44"
+                               class="form-control" required name="lastName" th:field="*{lastname}">
+                    </div>
+                    <div class="form-group">
+<!--                        <label>Электронная почта</label>-->
+                        <input type="text"  id="email" autofocus="autofocus" required placeholder="Электронная почта" minlength="8" maxlength="150" size="44"
+                               class="form-control" required name="email" th:field="*{email}" >
+                    </div>
+                    <div class="form-group">
+<!--                        <label>Пароль</label>-->
+                        <input type="password"  id="password" autofocus="autofocus" required placeholder="Пароль" minlength="8" maxlength="15" size="44"
+                               class="form-control" required name="password" th:field="*{password}" >
+                    </div>
+
+                    <input type="checkbox" name="isUserCheck" class="checkbox" id="checkbox" required value="yes">
+                    <label for="checkbox"> Я согласен с условиями обслуживания.</label>
+
+                    <div class="register-btn">
+                        <button class="register-btn" type="submit">Регистрация</button>
+                    </div>
+                    <span> Уже зарегистрированы? <a href="#" th:href="@{/login}">Войти</a></span>
+                </form>
+            </div>
         </div>
-    </div>
+    </main>
+
 </body>
 </html>
