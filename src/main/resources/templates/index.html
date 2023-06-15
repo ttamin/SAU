@@ -1,10 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAY - SAU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
+
 <body>
-<h1>index</h1>
+    <header th:insert="blocks/header :: header"></header>
+
+    <main>
+        <section class="banner">
+            <img src="/images/banner.svg" alt="banner" width="100%">
+        </section>
+        
+        <div class="container">
+            <section class="about-popular-products">
+                <h3>ПРОДУКТЫ НЕДЕЛИ</h3>
+                <div class="popular-products-cards">
+                    
+                    <article class="popular-mini-card">
+                        <a href="#">
+                            <img src="/images/cherry.svg" alt="" width="405" height="540">
+                            <h4>Вишня</h4>
+                            <h5>₸ 223,00</h5>
+                        </a>
+                    </article>
+                    
+                    <article class="popular-mini-card">
+                        <a href="#">
+                            <img src="/images/airan.svg" alt="" width="405" height="540">
+                            <h4>Айран</h4>
+                            <h5>₸ 223,00</h5>
+                        </a>
+                    </article>
+                    
+                    <article class="popular-mini-card">
+                        <a href="#">
+                            <img src="/images/myata.svg" alt="" width="405" height="540">
+                            <h4>Мята</h4>
+                            <h5>₸ 223,00</h5>
+                        </a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="about-blog"></section>
+
+            <section class="mini-about-us">
+                <div class="about-us-left">
+                    <div class="about-us-left-text">
+                        <h1>ПРО НАС</h1>
+                        <h2>Сау - это напиток на основе натуральных ингредиентов, включая фруктовые и ягодные экстракты. Он содержит множество полезных витаминов и минералов, которые помогут укрепить ваш
+                            иммунитет и улучшить ваше самочувствие. Но это не все! Сау имеет неповторимый вкус и аромат, который порадует даже самых искушенных гурманов. Его можно пить как самостоятельно,
+                            так и добавлять в коктейли или другие напитки для придания им новых оттенков вкуса.</h2>
+                    </div>
+                    <a href="">Читать больше ></a>
+                    &lt;!&ndash;<a href="#"> Читать больше ><img src="/images/arrow-right.svg" alt="arrow"> </a>&ndash;&gt;
+                </div>
+
+                <div class="about-us-right">
+                    <img src="/images/about us cow.svg" alt="our cow">
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer th:insert="blocks/footer :: footer"></footer>
+
 </body>
+
 </html>
