@@ -24,7 +24,7 @@ public class AdminProductController {
 
     @Autowired
     CategoryServiceImpl categoryService;
-    @GetMapping("/main")
+    @GetMapping("")
     public String products(Model model){
         model.addAttribute("products", productServiceImpl.getAllProducts());
         return "products";
@@ -59,13 +59,13 @@ public class AdminProductController {
         }
         product.setImageName(imageUUID);
         productServiceImpl.addProduct(product);
-        return "redirect:/admin/products/main";
+        return "redirect:/admin/products";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable long id){
         productServiceImpl.removeProductById(id);
-        return "redirect:/admin/products/main";
+        return "redirect:/admin/products";
     }
 
     @GetMapping("/update/{id}")

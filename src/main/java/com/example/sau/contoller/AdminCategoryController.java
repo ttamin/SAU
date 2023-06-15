@@ -17,31 +17,31 @@ public class AdminCategoryController {
     @Autowired
     CategoryServiceImpl categoryService;
 
-    @GetMapping("/main")
+    @GetMapping("")
     public String getCategories(Model model){
         model.addAttribute("categories", categoryService.getAllCategory());
         return "categories";
     }
 
-    @GetMapping("/categories/add")
+    @GetMapping("/add")
     public String getCatAdd(Model model){
         model.addAttribute("category", new Category());
         return "categoriesAdd";
     }
 
-    @PostMapping("/categories/add")
+    @PostMapping("/add")
     public String postCatAdd(@ModelAttribute("category") Category category){
         categoryService.addCategory(category);
-        return "redirect:/admin/categories/main";
+        return "redirect:/admin/categories";
     }
 
-    @GetMapping("/categories/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteCat(@PathVariable long id){
         categoryService.removeCategoryById(id);
-        return "redirect:/admin/categories/main";
+        return "redirect:/admin/categories";
     }
 
-    @GetMapping("/categories/update/{id}")
+    @GetMapping("/update/{id}")
     public String updateCat(@PathVariable long id, Model model){
         Optional<Category> category = categoryService.getCategoryById(id);
         if(category.isPresent()){

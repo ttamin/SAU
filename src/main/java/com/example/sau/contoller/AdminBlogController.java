@@ -23,7 +23,7 @@ public class AdminBlogController {
     @Autowired
     BlogServiceImpl blogService;
 
-    @GetMapping("/main")
+    @GetMapping("")
     public String blogs(Model model){
         model.addAttribute("blogs", blogService.getAllBlogs());
         return "blogs";
@@ -54,14 +54,14 @@ public class AdminBlogController {
         }
         blog.setImageName(imageUUID);
         blogService.addBlog(blog);
-        return "redirect:/admin/blogs/main";
+        return "redirect:/admin/blogs";
     }
 
 
     @GetMapping("/delete/{id}")
     public String deleteBlog(@PathVariable long id){
         blogService.removeBlogById(id);
-        return "redirect:/admin/blogs/main";
+        return "redirect:/admin/blogs";
 
     }
 

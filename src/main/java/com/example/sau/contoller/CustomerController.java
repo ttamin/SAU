@@ -22,7 +22,7 @@ public class CustomerController {
     @Autowired
     BlogServiceImpl blogService;
 
-    @GetMapping({ "/"})
+    @GetMapping({ ""})
     public String home(Model model) {
         model.addAttribute("cartCounter", GlobalData.cart.size());
         return "index";

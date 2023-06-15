@@ -19,16 +19,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private String firstname;
-    private String lastname;
+//    @Column(nullable = false)
+//    private String firstname;
+//    private String lastname;
     @Column(nullable = false, unique = true)
-//    @Email(message = "{error.invalid_email}")
+
     private String email;
     private String password;
     @Column(nullable = false, unique = true)
     private String username;
-    private String phone;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id",
@@ -36,10 +35,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id",
                     referencedColumnName = "id"))
     private List<Role> roles;
-//    private String address;
-//    private String city;
+
 @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 private Cart cart;
-//    public User(User user) {
-//    }
+
 }
