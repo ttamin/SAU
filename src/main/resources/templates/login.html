@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAU LOGIN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
-Don't have an account?<a href="/templates/register.html" th:href="@{/register}">register.</a></span>
-<form action="/login" method="post">
-    <table>
-        <tr>
-            <td>Login</td>
-            <td><input type="text" name="login" required placeholder="Enter your name" value=""/></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" required placeholder="Enter your password" value=""/></td>
-        </tr>
-    </table><br/>
-    <p><input name="submit" type="submit" value="Enter"></p>
-</form>
+    <header th:insert="blocks/header :: header"></header>
+    
+    <main class="login-register-form">
+        <div class="container">
+            <h1>Личный кабинет</h1>
+            <form action="/login" method="post">
+                <table>
+                    <tr>
+                        <td><input class="login-input" type="text" name="login" required placeholder="Электронная почта" required minlength="4" maxlength="150" size="44"></td>
+                    </tr>
+                    <tr>
+                        <td> <input class="login-input" type="password" name="password" required placeholder="Пароль" required minlength="8" maxlength="15" size="44"></td>
+                    </tr>
+                </table><br/>
+                
+            </form>
+            <h3><a href="/SAU/src/main/resources/templates/forgot-pass.html">Забыли пароль?</a></h3>
+            <section class="login-btns">
+                <a href="#">Войти</a>
+                <span class="register-btn"><a href="#" th:href="@{/register}">Регистрация</a></span>
+            </section>
+        </div>
+    </main>
 </body>
 </html>
+
