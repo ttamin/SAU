@@ -1,10 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFO SAU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
+
 <body>
-<h1> info</h1>
+    <header th:insert="blocks/header :: header"></header>
+
+<main class="info-page">
+    <div class="container">
+        <div class="info-delivery">
+            <h2>ДОСТАВКА</h2>
+            <p> <b>Адрес самовывоза: </b>Казахстан, г. Астана, проспект Абылай хана, 8</p>
+            <p>Доставка в другие города осуществляется через Казпочту</p>
+        </div>
+
+        <div class="info-contact">
+            <h2>КОНТАКТЫ</h2>
+            <p> <b>Адрес:</b> Казахстан, г. Астана, проспект Кабанбай батыра, 8</p>
+            <p> <b>Телефон: </b>+7 (777) 777 77 77</p>
+            <p><b>Электронная почта:</b> info@sau.kz</p>
+            <p><b>Рабочие часы:</b> 7.00 - 23.00</p>
+        </div>
+
+        <div class="info-faq">
+            <h2>FAQ</h2>
+            <section class="faq">
+                <div class="question">
+                    <h3>Осуществляете ли вы доставку за пределы Казахстана?</h3>
+                    <svg width="15" height="10" viewBox="0 0 42 25">
+                        <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="answer">
+                    <p>
+                        На данный момент мы осуществляем доставку только по Казахстану
+                    </p>
+                </div>
+            </section>
+            <section class="faq">
+                <div class="question">
+                    <h3>Что произойдет, если меня не будет дома во время доставки?</h3>
+                    <svg width="15" height="10" viewBox="0 0 42 25">
+                        <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="answer">
+                    <p>
+                        Тогда водитель пытается доставить посылку соседям. Если это не сработает, вскоре после этого вы получите электронное письмо с новым сроком доставки.
+                    </p>
+                </div>
+            </section>
+            <section class="faq">
+                <div class="question">
+                    <h3>Как долго прослужат мои товары?</h3>
+                    <svg width="15" height="10" viewBox="0 0 42 25">
+                        <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="answer">
+                    <p>
+                        Все товары отправляются замороженными. Вы можете хранить соки в морозильной камере в течение 3 месяцев. Когда вы разморозите сок, его можно хранить в холодильнике еще 3 дня.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+<script src="/SAU/src/main/resources/static/js/script.js"></script>
+    
 </body>
 </html>
