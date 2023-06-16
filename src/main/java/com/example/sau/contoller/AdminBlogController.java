@@ -26,13 +26,13 @@ public class AdminBlogController {
     @GetMapping("")
     public String blogs(Model model){
         model.addAttribute("blogs", blogService.getAllBlogs());
-        return "blogs";
+        return "admin/blogs";
     }
 
     @GetMapping("/add")
     public String getBlogAdd(Model model){
         model.addAttribute("blogDto", new BlogDto());
-        return "blogsAdd";
+        return "admin/blogsAdd";
     }
 
     @PostMapping("/add")
@@ -79,6 +79,6 @@ public class AdminBlogController {
 
         model.addAttribute("blogDto", blogDto);
 
-        return "blogsAdd";
+        return "admin/blogsAdd";
     }
 }

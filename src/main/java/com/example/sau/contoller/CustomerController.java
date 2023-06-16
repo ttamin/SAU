@@ -22,11 +22,7 @@ public class CustomerController {
     @Autowired
     BlogServiceImpl blogService;
 
-    @GetMapping({ ""})
-    public String home(Model model) {
-        model.addAttribute("cartCounter", GlobalData.cart.size());
-        return "index";
-    }
+
 
     @GetMapping("/shop")
     public String shop(Model model){
@@ -34,7 +30,7 @@ public class CustomerController {
         model.addAttribute("products", productServiceImpl.getAllProducts());
         model.addAttribute("cartCounter", GlobalData.cart.size());
 
-        return "shop";
+        return "home/shop";
     }
 
     @GetMapping("/shop/category/{id}")
@@ -42,20 +38,20 @@ public class CustomerController {
         model.addAttribute("categories", categoryService.getAllCategory());
         model.addAttribute("cartCounter", GlobalData.cart.size());
         model.addAttribute("products", productServiceImpl.getAllProductsByCategoryId(id));
-        return "shop";
+        return "home/shop";
     }
     @GetMapping("/shop/viewproduct/{id}")
     public String viewProduct(Model model, @PathVariable long id){
         model.addAttribute("product", productServiceImpl.getProductById(id).get());
         model.addAttribute("cartCounter", GlobalData.cart.size());
-        return "viewproduct";
+        return "home/viewproduct";
     }
 
     @GetMapping("/about-us")
     public String aboutUs(Model model){
         model.addAttribute("cartCounter", GlobalData.cart.size());
 
-        return "about-us";
+        return "home/about-us";
     }
 
     @GetMapping("/blogs")
@@ -63,7 +59,7 @@ public class CustomerController {
         model.addAttribute("blogs", blogService.getAllBlogs());
         model.addAttribute("cartCounter", GlobalData.cart.size());
 
-        return "blogPage";
+        return "home/blogPage";
     }
 
     @GetMapping("/blogs/{id}")
@@ -71,12 +67,12 @@ public class CustomerController {
         model.addAttribute("blog", blogService.getBlogById(id).get());
         model.addAttribute("cartCounter", GlobalData.cart.size());
 
-        return "blogDetails";
+        return "home/blogDetails";
     }
 
     @GetMapping("/info")
     public String infoPage(Model model){
         model.addAttribute("cartCounter", GlobalData.cart.size());
-        return "info";
+        return "home/info";
     }
 }

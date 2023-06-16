@@ -17,7 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class ShoppingCartController {
+@RequestMapping("/cart")
+public class CartController {
 
         @Autowired
         ProductServiceImpl productServiceImpl;
@@ -26,13 +27,13 @@ public class ShoppingCartController {
         @Autowired
         CustomerFormServiceImpl customerFormService;
 
-        @GetMapping("/cart")
+        @GetMapping("")
         public String cartGet(Model model) {
             int totalItems = calculateTotalItems();
             model.addAttribute("cartCounter", totalItems);
             model.addAttribute("total", calculateTotal());
             model.addAttribute("cart", GlobalData.cart);
-            return "cart";
+            return "cart/cart";
         }
 
     private int calculateTotalItems() {
@@ -41,7 +42,7 @@ public class ShoppingCartController {
                 .sum();
     }
 
-        @GetMapping("/cart/addT/{id}")
+        @GetMapping("/add/{id}")
         public String addToCart(@PathVariable long id) {
             Optional<Product> productOptional = productServiceImpl.getProductById(id);
             if (productOptional.isPresent()) {
@@ -60,7 +61,7 @@ public class ShoppingCartController {
             return "redirect:/shop";
         }
 
-        @PostMapping("/cart/add")
+        @PostMapping("/add")
         public String addItemToCart(@RequestParam("productId") long productId) {
             Optional<Product> productOptional = productServiceImpl.getProductById(productId);
             if (productOptional.isPresent()) {
@@ -79,7 +80,7 @@ public class ShoppingCartController {
         }
 
 
-        @PostMapping("/cart/updateQuantity")
+        @PostMapping("/updateQuantity")
         public String updateCartItemQuantity(@RequestParam("productId") long productId, @RequestParam("quantity") int quantity) {
             Optional<CartItem> cartItemOptional = cartItemService.getCartItemByProductId(productId);
 
@@ -94,7 +95,7 @@ public class ShoppingCartController {
             return "redirect:/cart";
         }
 
-            @GetMapping("/cart/removeProduct/{index}")
+            @GetMapping("/removeProduct/{index}")
             public String cartItemRemove(@PathVariable int index) {
                 GlobalData.cart.remove(index);
                 return "redirect:/cart";
@@ -104,13 +105,13 @@ public class ShoppingCartController {
             public String checkout(Model model) {
                 model.addAttribute("customerForm", new CustomerForm());
                 model.addAttribute("total", calculateTotal());
-                return "checkout";
+                return "cart/checkout";
             }
 
             @PostMapping("/checkout")
             public String checkoutSend(@ModelAttribute("customerForm") CustomerForm customerForm){
                 customerFormService.addCustomerForm(customerForm);
-                return "successfulPage";
+                return "cart/successfulPage";
             }
 
 

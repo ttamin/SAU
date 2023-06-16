@@ -4,12 +4,12 @@
             <a href="/templates/adminHome.html" th:href="@{/admin}">SAU</a>
         </div>
         <ul>
-            <li><a href="/templates/categories.html" th:href="@{/admin/categories/main}" class="card-link btn btn-primary">Categories</a></li>
-            <li><a href="/templates/products.html" th:href="@{/admin/products/main}" class="card-link btn btn-primary">Products</a></li>
+            <li><a href="/templates/admin/categories.html" th:href="@{/admin/categories}" class="card-link btn btn-primary">Categories</a></li>
+            <li><a href="/templates/admin/products.html" th:href="@{/admin/products}" class="card-link btn btn-primary">Products</a></li>
             <li><a class="nav-link" th:href="@{/admin}" href="#">Admin-home</a></li>
             <li><a href="#">Orders</a></li>
-            <li><a href="#">Users</a></li>
-            <li><a href="/templates/blogs.html" th:href="@{/admin/blogs/main}" class="card-link btn btn-primary">Blogs</a></li>
+            <li><a href="/templates/users/users.html" th:href="@{/users}">Users</a></li>
+            <li><a href="/templates/admin/blogs.html" th:href="@{/admin/blogs}" class="card-link btn btn-primary">Blogs</a></li>
             <li><a class="nav-link" th:href="@{/logout}" href="#">Log out</a></li>
         </ul>
     </section>

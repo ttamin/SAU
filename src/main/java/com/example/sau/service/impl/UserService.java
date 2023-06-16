@@ -6,22 +6,15 @@ import com.example.sau.model.User;
 import java.util.List;
 
 public interface UserService {
-//    User createUser(User user);
+    void saveUser(UserDto userDto);
 
-    User findByUsername(String username);
-    User changePassword(UserDto userDto);
-    User getUserByEmail(String email);
-//    boolean isInvalidUser(UserDto userDto);
-//    String invalidUser(UserDto userDto);
+    User findByEmail(String email);
 
 
-    UserDto create(UserDto user);
-    UserDto updateUser(UserDto user);
-    UserDto getUserById(Long userId);
-    void deleteUser(Long userId);
-    List<UserDto> getAllUsers();
+    List<User> findAllUsers();
 
+    void updateUserRoleToAdmin(Long userId);
 
-//    public void save(UserDto userDto);
+    void deleteUserById(Long id);
 
 }

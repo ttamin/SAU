@@ -18,9 +18,12 @@ public class Role {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
+    public boolean isLast() {
+        return users.indexOf(this) == users.size() - 1;
+    }
 
 }

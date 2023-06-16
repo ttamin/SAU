@@ -25,12 +25,19 @@
                   <a href="#"> <img src="/images/search.svg" alt="search"></a>
                 </div>
                 <div class="nav-cart">
-                  <a sec:authorize="isAuthenticated() &&(hasRole('USER'))" th:href="@{/cart}"> <a href="/cart"><span th:text="${cartCounter}"><img src="/images/cart.svg" alt="cart"></span></a> </a>
+                    <a sec:authorize="isAuthenticated() && hasRole('USER')" th:href="@{/cart}">
+                        <a href="/cart">
+                            <span th:text="${cartCounter}">
+                                <img src="/images/cart.svg" alt="cart">
+                            </span>
+                        </a>
+                    </a>
                 </div>
 
-                <div sec:authorize="isAuthenticated() && !hasRole('ADMIN')">
-                    <a class="nav-link active" th:href="'/users/profile' + ${#authentication.getPrincipal().getUserId}">Profile</a>
-                </div>
+<!--                <div sec:authorize="isAuthenticated() && !hasRole('ADMIN')">-->
+<!--                    <a class="nav-link active" th:href="'/users/profile/' + ${#authentication.principal.id}">Profile</a>-->
+<!--                </div>-->
+
                 <form class="d-flex" sec:authorize="!isAuthenticated()">
                     <a href="/logout" class="btn btn-primary" role="button" aria-desabled="true">Login</a>
                 </form>

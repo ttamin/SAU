@@ -19,15 +19,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-//    @Column(nullable = false)
-//    private String firstname;
-//    private String lastname;
-    @Column(nullable = false, unique = true)
-
-    private String email;
-    private String password;
     @Column(nullable = false, unique = true)
     private String username;
+    @Column(nullable = false, unique = true)
+    private String email;
+    private String password;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id",
@@ -39,6 +36,7 @@ public class User {
 @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 private Cart cart;
 
-    public User(Long id, String username, String password, String email) {
+    public Long getId() {
+        return id;
     }
 }
