@@ -2,6 +2,7 @@ package com.example.sau.model;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false, unique = true)
+    @Email
     private String email;
     private String password;
 

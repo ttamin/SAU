@@ -21,9 +21,7 @@
             </nav>
 
             <div class="nav-btns">
-                <div class="nav-search">
-                  <a href="#"> <img src="/images/search.svg" alt="search"></a>
-                </div>
+
                 <div class="nav-cart">
                     <a sec:authorize="isAuthenticated() && hasRole('USER')" th:href="@{/cart}">
                         <a href="/cart">

@@ -17,9 +17,9 @@
 
     <section th:insert="blocks/section :: section"></section>
 
-    <main class="main">
-        <h1>Welcome, Admin! Good Job!</h1>
-    </main>
+    <div class="container">
+        <h1>Welcome, <span th:text="${username}"></span>!</h1>
+    </div>
 
 </body>
 </html>

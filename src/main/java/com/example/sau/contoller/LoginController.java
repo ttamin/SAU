@@ -21,15 +21,13 @@ public class LoginController {
     public String adminHome(Model model) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         UserDetails user = (UserDetails) securityContext.getAuthentication().getPrincipal();
-        //model.addAttribute("session", username);
+        model.addAttribute("username", user.getUsername());
         return "admin/adminHome";
     }
 
     @GetMapping({"/home", ""})
     public String home(Model model) {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        UserDetails user = (UserDetails) securityContext.getAuthentication().getPrincipal();
-        model.addAttribute("username", user.getUsername());
+
         model.addAttribute("cartCounter", GlobalData.cart.size());
         return "home/index";
     }
