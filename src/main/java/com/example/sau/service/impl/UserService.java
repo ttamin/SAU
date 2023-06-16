@@ -17,4 +17,6 @@ public interface UserService {
 
     void deleteUserById(Long id);
 
+    public void removeUserRoleAdmin(Long userId);
+
 }

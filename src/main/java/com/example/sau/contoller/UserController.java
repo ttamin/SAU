@@ -23,15 +23,27 @@ public class UserController {
         return "/users/users";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable Long id){
-        userService.deleteUserById(id);
-        return "redirect:/users";
+//    @GetMapping("/delete/{id}")
+//    public String deleteUser(@PathVariable Long id){
+//        userService.deleteUserById(id);
+//        return "redirect:/users";
+//
+//    }
+//    @PostMapping("/{id}/promote")
+//    public String promoteUserToAdmin(@PathVariable("id") Long userId) {
+//        userService.updateUserRoleToAdmin(userId);
+//        return "redirect:/users";
+//    }
 
-    }
-    @PostMapping("/{id}/promote")
-    public String promoteUserToAdmin(@PathVariable("id") Long userId) {
+    @PostMapping("/{userId}/admin")
+    public String updateUserRoleToAdmin(@PathVariable("userId") Long userId) {
         userService.updateUserRoleToAdmin(userId);
+        return "redirect:/users";
+    }
+
+    @PostMapping("/{userId}/remove-admin")
+    public String removeUserRoleAdmin(@PathVariable("userId") Long userId) {
+        userService.removeUserRoleAdmin(userId);
         return "redirect:/users";
     }
 }

@@ -12,6 +12,7 @@ import com.example.sau.service.impl.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,6 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRoles(userDto.getRoles());
-        //user.setRol(userDto.getRol());
         if (userDto.getRoles().isEmpty()) {
             Role role = roleRepo.findByName("ROLE_USER");
             if (role == null) {
@@ -89,5 +89,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(Long id) {
         userRepo.deleteById(id);
+    }
+
+    @Override
+    public void removeUserRoleAdmin(Long userId) {
+        User user = userRepo.findById(userId).orElse(null);
+        if (user != null) {
+            Role role = roleRepo.findByName("ROLE_ADMIN");
+            if (role != null) {
+                user.getRoles().remove(role);
+                userRepo.save(user);
+            }
+        }
     }
 }
