@@ -21,7 +21,6 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
     @Value("${admin.username}")
-
     private String adminUserName;
     @Value("${admin.password}")
     private String adminPassword;

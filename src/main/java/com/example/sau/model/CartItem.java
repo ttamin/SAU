@@ -35,7 +35,7 @@ public class CartItem {
                 ", cart=" + cart.getId() +
                 ", product=" + product.getName() +
                 ", quantity=" + quantity +
-                ", subTotal=" + subTotal +
+                ", subTotal=" + product.getPrice()*quantity +
                 ", totalPrice=" +
                 ", imageName=" +
                 '}';
