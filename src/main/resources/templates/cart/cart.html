@@ -1,55 +1,66 @@
-<!-- cart.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cart</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAY - SAU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
+
 <body>
-<h1>Cart</h1>
+    <header th:insert="blocks/header :: header"></header>
 
-<p>Number of items in cart: <span th:text="${cartCounter}"></span></p>
+    <main class="cart-page">
+        <div class="container">
+            <p>Number of items in cart: <span class="cart-counter" th:text="${cartCounter}"></span></p>
 
-<table>
-    <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Subtotal</th>
-        <th>Action</th>
-    </tr>
-    <tr th:each="item, itemStat : ${cart}">
-        <td>
-            <img th:src="@{'/images/' + ${item.product.imageName}}" alt="Product Image" width="100px">
-            <span th:text="${item.product.name}"></span>
-        </td>
-        <td th:text="${item.subTotal}"></td>
-<!--        <td>-->
-<!--            <input type="number" min="1" th:value="${item.quantity}" th:attr="data-index=${itemStat.index}" onchange="updateQuantity(this)">-->
-<!--        </td>-->
-        <td th:text="${item.subTotal * item.quantity}"></td>
-        <td>
-            <a th:href="@{'/cart/removeProduct/' + ${itemStat.index}}">Remove</a>
-        </td>
-        <form th:action="@{/cart/updateQuantity}" method="post">
-            <input type="hidden" name="productId" th:value="${item.product.id}" />
-            <input type="number" min="1" name="quantity" th:value="${item.quantity}" />
-            <button type="submit">Update</button>
-        </form>
+            <table id="cart-page-form">
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                </tr>
 
-    </tr>
-</table>
+                <tr th:each="item, itemStat : ${cart}">
+                    <td>
+                        <img th:src="@{'/productImages/' + ${item.product.imageName}}" alt="Product Image" width="50px">
+                        <span th:text="${item.product.name}"></span>
+                    </td>
 
-<h2>Total: <span th:text="${total}"></span></h2>
+                    <td class="subtotal-price" th:text="${item.subTotal}"></td>
 
-<a href="/checkout">Checkout</a>
+                    <td>
+                        <form th:action="@{/cart/updateQuantity}" method="post">
+                            <input type="hidden" name="productId" th:value="${item.product.id}" />
+                            <input class="subtotal-quantity" type="number" min="1" name="quantity" th:value="${item.quantity}"/>
+                        </form>
+                    </td>
 
-<!--<script>-->
-<!--    function updateQuantity(input) {-->
-<!--        var index = input.getAttribute('data-index');-->
-<!--        var quantity = input.value;-->
-<!--        window.location.href = '/cart/updateQuantity/' + index + '?quantity=' + quantity;-->
-<!--    }-->
-<!--</script>-->
+                    <td class="subtotal-value" th:text="${item.subTotal * item.quantity}"></td>
+
+                    <td> <a th:href="@{'/cart/removeProduct/' + ${itemStat.index}}">Remove</a> </td>
+
+                </tr>
+            </table>
+
+            <h2>Total: <span class="total-item" th:text="${total}"></span></h2>
+
+            <a href="/checkout">Checkout</a>
+        </div>
+    </main>
+
+
+    <script src="/js/calculateSubtotal.js"></script>
+
 </body>
 </html>
