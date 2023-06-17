@@ -1,53 +1,67 @@
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>shop</title>
-    <link rel="stylesheet" href="/css/normolize.css">
-    <link rel="stylesheet" href="/css/main.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAU SHOP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/src/main/resources/static/images/SAU-LOGO.svg">
+  <link rel="stylesheet" href="/css/normolize.css">
+  <link rel="stylesheet" href="/css/main.css">
+<!--  <link rel="stylesheet" href="/src/main/resources/static/css/normolize.css">-->
+<!--  <link rel="stylesheet" href="/src/main/resources/static/css/main.css">-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
-<nav>
-  <a class="nav-link" th:href="@{/templates/home}" href="#">home</a>
-  <a class="nav-link" th:href="@{/home/shop}" href="#">shop</a>
-  <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
-  <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
-  <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
-<!--  <a class="nav-link" th:href="@{/cartCount}" href="#">0</a>-->
-  <li><a href="/cart">Cart <span th:text="${cartCounter}"></span></a></li>
-</nav>
-<div class="container">
-  <div class="error-message">
-    <p th:text="${errorMessage}"></p>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <h4>Categories</h4>
-      <ul class="list-group">
-        <a th:href="@{/shop}"><li class="list-group-item">All products</li></a>
-        <a href="" th:each="category, iStat: ${categories}"
-           th:href="@{/shop/category/{id}(id=${category.id})}">
-          <li class="list-group-item" th:text="${category.name}"></li></a>
-      </ul>
-    </div>
-    <div class="col-sm-9">
-      <div class="card" th:each="product: ${products}">
-        <div class="row no-gutters">
-          <div class="col-sm-5 d-flex justify-content-center">
-            <img src="" height="150px" width="150px" th:src="@{${'/productImages/'+product.imageName}}">
-          </div>
-          <div class="col-sm-7 d-flex justify-content-center">
+  <header th:insert="blocks/header :: header"></header>
+
+  <main class="shop-page">
+    <div class="container">
+
+      <div class="shop-left-side">
+        <h1><a th:href="@{/home/shop}">Магазин</a></h1>
+        <div class="product-list">
+          <div class="product" th:each="product: ${products}">
+            <div class="col-sm-5 d-flex justify-content-center">
+              <img src="" height="250px" width="250px" th:src="@{${'/productImages/'+product.imageName}}">
+            </div>
+
             <div class="card-body">
-              <h5 class="card-title" th:text="${product.name}"></h5>
-              <h4><span th:text="${product.price}"></span> </h4>
-              <p th:text="${product.description}">This drink very strong</p>
-              <a href="#" th:href="@{/shop/viewproduct/{id}(id=${product.id})}" class="btn btn-primary">View</a>
+              <h3 class="card-title" th:text="${product.name}"></h3>
+              <h4><span th:text="${product.price}"></span></h4>
+              <!--<p th:text="${product.description}">This drink very strong</p>-->
+              <a class="view-product-detail-btn" th:href="@{/home/shop/viewproduct/{id}(id=${product.id})}">Подробнее</a>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="shop-right-side">
+      <input type="text" name="" id="find" placeholder="Поиск..." onkeyup="search()">
+      <div class="categories">
+        <h4>Категории</h4>
+        <ul class="list-group">
+          <a th:href="@{/home/shop}"><li class="list-group-item">Все</li></a>
+          <a href="" th:each="category, iStat: ${categories}"
+             th:href="@{/home/shop/category/{id}(id=${category.id})}">
+            <li class="list-group-item" th:text="${category.name}"></li>
+          </a>
+        </ul>
+      </div>
     </div>
-  </div>
-</div>
+
+    </div>
+  </main>
+
+
+  <footer th:insert="blocks/footer :: footer"></footer>
+
+  <script src="/js/product-search.js"></script>
 </body>
 </html>
