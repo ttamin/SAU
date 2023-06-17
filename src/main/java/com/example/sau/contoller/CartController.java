@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,12 @@ public class CartController {
             model.addAttribute("cartCounter", totalItems);
             model.addAttribute("total", calculateTotal());
             model.addAttribute("cart", GlobalData.cart);
-            return "cart/cart";
+
+            if (totalItems == 0) {
+                return "cart/empty-cart";
+            } else {
+                return "cart/cart";
+            }
         }
 
     private int calculateTotalItems() {
@@ -44,36 +50,46 @@ public class CartController {
 
         @GetMapping("/add/{id}")
         public String addToCart(@PathVariable long id) {
-            Optional<Product> productOptional = productServiceImpl.getProductById(id);
-            if (productOptional.isPresent()) {
-                Product product = productOptional.get();
+            try {
+                Optional<Product> productOptional = productServiceImpl.getProductById(id);
+                if (productOptional.isPresent()) {
+                    Product product = productOptional.get();
 
-                CartItem cartItem = new CartItem();
-                cartItem.setProduct(product);
-                cartItem.setQuantity(1);
-                cartItem.setSubTotal(product.getPrice());
-                cartItem.setImageName(product.getImageName());
-                List<CartItem> cartItems = new ArrayList<>();
-                cartItems.add(cartItem);
-                GlobalData.cart = cartItems;
+                    CartItem cartItem = new CartItem();
+                    cartItem.setProduct(product);
+                    cartItem.setQuantity(1);
+                    cartItem.setSubTotal(product.getPrice());
+                    cartItem.setImageName(product.getImageName());
+                    List<CartItem> cartItems = new ArrayList<>();
+                    cartItems.add(cartItem);
+                    GlobalData.cart = cartItems;
+                }
+            } catch (Exception e) {
+                return "redirect:/shop?error=addToCartError";
             }
 
             return "redirect:/shop";
         }
 
         @PostMapping("/add")
-        public String addItemToCart(@RequestParam("productId") long productId) {
-            Optional<Product> productOptional = productServiceImpl.getProductById(productId);
-            if (productOptional.isPresent()) {
-                Product product = productOptional.get();
+        public String addItemToCart(@RequestParam("productId") long productId, RedirectAttributes redirectAttributes) {
+            try {
+                Optional<Product> productOptional = productServiceImpl.getProductById(productId);
+                if (productOptional.isPresent()) {
+                    Product product = productOptional.get();
 
-                CartItem cartItem = new CartItem();
-                cartItem.setProduct(product);
-                cartItem.setQuantity(1);
-                cartItem.setSubTotal(product.getPrice());
-                cartItem.setImageName(product.getImageName());
+                    CartItem cartItem = new CartItem();
+                    cartItem.setProduct(product);
+                    cartItem.setQuantity(1);
+                    cartItem.setSubTotal(product.getPrice());
+                    cartItem.setImageName(product.getImageName());
 
-                GlobalData.cart.add(cartItem);
+                    GlobalData.cart.add(cartItem);
+                } else {
+                    redirectAttributes.addAttribute("errorMessage", "Error adding item to cart. Product not found.");
+                }
+            } catch (Exception e) {
+                redirectAttributes.addAttribute("errorMessage", "Error adding item to cart. Please try again.");
             }
 
             return "redirect:/shop";
@@ -95,11 +111,20 @@ public class CartController {
             return "redirect:/cart";
         }
 
-            @GetMapping("/removeProduct/{index}")
-            public String cartItemRemove(@PathVariable int index) {
-                GlobalData.cart.remove(index);
-                return "redirect:/cart";
+        @GetMapping("/removeProduct/{index}")
+        public String cartItemRemove(@PathVariable int index, RedirectAttributes redirectAttributes) {
+            try {
+                if (index >= 0 && index < GlobalData.cart.size()) {
+                    GlobalData.cart.remove(index);
+                } else {
+                    redirectAttributes.addAttribute("errorMessage", "Invalid index. Product not removed.");
+                }
+            } catch (Exception e) {
+                redirectAttributes.addAttribute("errorMessage", "Error removing product. Please try again.");
             }
+
+            return "redirect:/cart";
+        }
 
             @GetMapping("/checkout")
             public String checkout(Model model) {

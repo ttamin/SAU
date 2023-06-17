@@ -50,15 +50,20 @@ public class AdminProductController {
         product.setPrice(productDto.getPrice());
         product.setDescription(productDto.getDescription());
         String imageUUID;
-        if(!file.isEmpty()){
-            imageUUID = file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
-            Files.write(fileNameAndPath, file.getBytes());
-        } else {
-            imageUUID=imgName;
+        try {
+            if (!file.isEmpty()) {
+                imageUUID = file.getOriginalFilename();
+                Path fileNameAndPath = Paths.get(uploadDir, imageUUID);
+                Files.write(fileNameAndPath, file.getBytes());
+            } else {
+                imageUUID = imgName;
+            }
+            product.setImageName(imageUUID);
+            productServiceImpl.addProduct(product);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error-page/product-error";
         }
-        product.setImageName(imageUUID);
-        productServiceImpl.addProduct(product);
         return "redirect:/admin/products";
     }
 

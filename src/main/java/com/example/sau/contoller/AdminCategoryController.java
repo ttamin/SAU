@@ -37,7 +37,12 @@ public class AdminCategoryController {
 
     @GetMapping("/delete/{id}")
     public String deleteCat(@PathVariable long id){
-        categoryService.removeCategoryById(id);
+        try {
+            categoryService.removeCategoryById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error-page/category-error";
+        }
         return "redirect:/admin/categories";
     }
 
@@ -48,7 +53,7 @@ public class AdminCategoryController {
             model.addAttribute("category", category.get());
             return "admin/categoriesAdd";
         } else
-            return "404";
+            return "error-page/category-error";
     }
 
 }

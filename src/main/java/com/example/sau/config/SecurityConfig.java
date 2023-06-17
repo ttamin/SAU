@@ -48,6 +48,7 @@ public class SecurityConfig {
                                 .requestMatchers("/register/**", "/", "/home/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
 //                                .requestMatchers("/users/{id}/promote").hasRole("ADMIN")
+                                .requestMatchers("/home/blogs/**").permitAll()
                                 .requestMatchers("/users/**").hasRole("ADMIN")
                                 .requestMatchers("/cart/**").authenticated()
                                 .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()

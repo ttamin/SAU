@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.NoSuchElementException;
+
 @Controller
 @RequestMapping("/admin/blogs")
 
@@ -38,47 +40,63 @@ public class AdminBlogController {
     @PostMapping("/add")
     public String postProductAdd(@ModelAttribute("blogDto") BlogDto blogDto,
                                  @RequestParam("blogImage") MultipartFile file,
-                                 @RequestParam("imgName") String imgName) throws IOException {
+                                 @RequestParam("imgName") String imgName) {
         Blog blog = new Blog();
         blog.setId(blogDto.getId());
         blog.setName(blogDto.getName());
         blog.setAnons(blogDto.getAnons());
         blog.setFulltext(blogDto.getFulltext());
         String imageUUID;
-        if(!file.isEmpty()){
-            imageUUID = file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(uplDir, imageUUID);
-            Files.write(fileNameAndPath, file.getBytes());
-        } else {
-            imageUUID=imgName;
+        try {
+            if (!file.isEmpty()) {
+                imageUUID = file.getOriginalFilename();
+                Path fileNameAndPath = Paths.get(uplDir, imageUUID);
+                Files.write(fileNameAndPath, file.getBytes());
+            } else {
+                imageUUID = imgName;
+            }
+            blog.setImageName(imageUUID);
+            blogService.addBlog(blog);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            return "error-page/error";
         }
-        blog.setImageName(imageUUID);
-        blogService.addBlog(blog);
         return "redirect:/admin/blogs";
     }
 
 
     @GetMapping("/delete/{id}")
     public String deleteBlog(@PathVariable long id){
-        blogService.removeBlogById(id);
-        return "redirect:/admin/blogs";
+        try {
+            blogService.removeBlogById(id);
+            return "redirect:/admin/blogs";
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            return "error-page/blog-notfound";
+        }
 
     }
 
     @GetMapping("/update/{id}")
     public String updateBlog(@PathVariable long id, Model model) {
-        Blog blog = blogService.getBlogById(id).get();
-        BlogDto blogDto = new BlogDto();
-        blogDto.setId(blog.getId());
-        blogDto.setName(blog.getName());
-        blogDto.setAnons(blog.getAnons());
+        try {
+            Blog blog = blogService.getBlogById(id).orElse(null);
+            if (blog == null) {
+                throw new Exception("Blog not found with id: " + id);
+            }
+            BlogDto blogDto = new BlogDto();
+            blogDto.setId(blog.getId());
+            blogDto.setName(blog.getName());
+            blogDto.setAnons(blog.getAnons());
+            blogDto.setFulltext(blog.getFulltext());
+            blogDto.setImageName(blog.getImageName());
 
-
-        blogDto.setFulltext(blog.getFulltext());
-        blogDto.setImageName(blog.getImageName());
-
-        model.addAttribute("blogDto", blogDto);
-
-        return "admin/blogsAdd";
+            model.addAttribute("blogDto", blogDto);
+            return "admin/blogsAdd";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error-page/blog-notfound";
+        }
     }
 }
