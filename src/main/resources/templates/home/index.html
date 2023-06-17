@@ -19,37 +19,58 @@
     <header th:insert="blocks/header :: header"></header>
 
     <main>
-        <section class="banner">
-            <img src="/images/banner.svg" alt="banner" width="100%">
-        </section>
+        <section>
+            <div class="banner">
+                <div class="mySlides fadeIn"> <!-- fadeIn - эффект перехода -->
+                    <img src="/images/banner-1.svg" alt="banner" style="width: 100%;">
+                </div>
 
+                <div class="mySlides fadeIn"> <!-- fadeIn - эффект перехода -->
+                    <img src="/images/banner-2.svg" alt="banner" style="width: 100%;">
+                </div>
+
+                <div class="mySlides fadeIn"> <!-- fadeIn - эффект перехода -->
+                    <img src="/images/banner-3.svg" alt="banner" style="width: 100%;">
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094</a>
+                <a class="next" onclick="plusSlides(1)">&#10095</a>
+            </div>
+
+            <br>
+
+            <div style="text-align: center;">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+
+        </section>
+        
         <div class="container">
             <section class="about-popular-products">
                 <h3>ПРОДУКТЫ НЕДЕЛИ</h3>
                 <div class="popular-products-cards">
                     
                     <article class="popular-mini-card">
-                        <a href="#">
                             <img src="/images/cherry.svg" alt="" width="405" height="540">
                             <h4>Вишня</h4>
                             <h5>₸ 223,00</h5>
-                        </a>
+                            <a class="view-product-detail-btn" th:href="@{/home/shop}">Подробнее</a>
                     </article>
-                    
+
                     <article class="popular-mini-card">
-                        <a href="#">
                             <img src="/images/airan.svg" alt="" width="405" height="540">
                             <h4>Айран</h4>
                             <h5>₸ 223,00</h5>
-                        </a>
+                            <a class="view-product-detail-btn" th:href="@{/home/shop}">Подробнее</a>
                     </article>
-                    
+
                     <article class="popular-mini-card">
-                        <a href="#">
                             <img src="/images/myata.svg" alt="" width="405" height="540">
                             <h4>Мята</h4>
                             <h5>₸ 223,00</h5>
-                        </a>
+                            <a class="view-product-detail-btn" th:href="@{/home/shop}">Подробнее</a>
                     </article>
                 </div>
             </section>
@@ -57,25 +78,43 @@
             <section class="about-blog"></section>
 
             <section class="mini-about-us">
-                <div class="about-us-left">
-                    <div class="about-us-left-text">
-                        <h1>ПРО НАС</h1>
-                        <h2>Сау - это напиток на основе натуральных ингредиентов, включая фруктовые и ягодные экстракты. Он содержит множество полезных витаминов и минералов, которые помогут укрепить ваш
-                            иммунитет и улучшить ваше самочувствие. Но это не все! Сау имеет неповторимый вкус и аромат, который порадует даже самых искушенных гурманов. Его можно пить как самостоятельно,
-                            так и добавлять в коктейли или другие напитки для придания им новых оттенков вкуса.</h2>
-                    </div>
-                    <a href="">Читать больше ></a>
-                    &lt;!&ndash;<a href="#"> Читать больше ><img src="/images/arrow-right.svg" alt="arrow"> </a>&ndash;&gt;
+                <h2>О НАС</h2>
+                <div class="mini-about-us-counter-part">
+                    <article class="mini-about-us-counter">
+                        <i class="fas fa-shopping-cart"></i>
+                        <div id="out-1" class="out-num1" data-counter="50">0</div>
+                        <p class="hero">заказов</p>
+                    </article>
+
+                    <article class="mini-about-us-counter">
+                        <i class="fas fa-building"></i>
+                        <div id="out-2" class="out-num2" data-counter="7">0</div>
+                        <p class="hero">город</p>
+                    </article>
+
+                    <article class="mini-about-us-counter">
+                        <i class="fas fa-user"></i>
+                        <div id="out-3" class="out-num3" data-counter="2">0</div>
+                        <p class="hero">в команде</p>
+                    </article>
+
+                    <article class="mini-about-us-counter">
+                        <i class="fas fa-calendar"></i>
+                        <div id="out-4" class="out-num4" data-counter="20">0</div>
+                        <p class="hero">дней</p>
+                    </article>
                 </div>
 
-                <div class="about-us-right">
-                    <img src="/images/about us cow.svg" alt="our cow">
-                </div>
+
             </section>
         </div>
     </main>
 
     <footer th:insert="blocks/footer :: footer"></footer>
+
+    <script src="/js/carusel.js"></script>
+
+    <script src="/js/scroll-counter.js"></script>
 
 </body>
 
