@@ -1,52 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAY - SAU</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
-    <link rel="stylesheet" href="/css/normolize.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <title>Title</title>
 </head>
-
 <body>
+<nav>
+    <a class="nav-link" th:href="@{/templates/home}" href="#">home</a>
+    <a class="nav-link" th:href="@{/home/shop}" href="#">shop</a>
 
-<header th:insert="blocks/header :: header"></header>
-
-<main class="shop-view-product-detail">
-    <div class="container">
-        <section class="shop-product-way">
-            <h1><a th:href="@{/home/shop}">Магазин /<a th:text="${product.name}"></a> </a></h1>
-        </section>
-
-        <section class="shop-product-detail">
-            <article class="shop-product-detail-img">
-                <img src="" height="150px" width="150px" th:src="@{${'/productImages/'+product.imageName}}">
-            </article>
-
-            <article class="shop-product-detail-text-info">
-                <h3 class="card-title" th:text="${product.name}"></h3>
-                <h4><span th:text="${product.price}"></span> </h4>
-                <h5>Описание<p th:text="${product.description}"></p></h5>
-
-                <form th:action="@{/cart/add}" method="post">
-                    <input type="hidden" name="productId" th:value="${product.id}">
-                    <button type="submit" class="add-to-cart-btn">Добавить</button>
-                </form>
-            </article>
-
-
-
-        </section>
-
-    </div>
-</main>
-<footer th:insert="blocks/footer :: footer"></footer>
+    <li><a href="/cart">Cart <span th:text="${cartCounter}"></span></a></li>
+</nav>
+<div class="container">
+    <h5 class="card-title" th:text="${product.name}"></h5>
+    <h4><span th:text="${product.price}"></span> </h4>
+    <p th:text="${product.description}">This drink very strong</p>
+    <img src="" height="150px" width="150px" th:src="@{${'/productImages/'+product.imageName}}">
+    <form th:action="@{/cart/add}" method="post">
+        <input type="hidden" name="productId" th:value="${product.id}">
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+</div>
 </body>
 </html>

@@ -131,8 +131,7 @@ header .container,
 /* end banner */
 
 /* popular week of product */
-.about-popular-products h3,
-.mini-about-us h2{
+.about-popular-products h3{
     font-weight: 700;
     font-size: 44px;
     line-height: 60px;
@@ -169,31 +168,22 @@ header .container,
 }
 /* end popular week of product */
 
-/* about us on homepage */
-.mini-about-us h2{
-    margin-bottom: 58px;
-}
-.mini-about-us-counter-part{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* about us on homepage
+@keyframes scroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
 }
 
-.mini-about-us-counter{
-    text-align: center;
-}
-.mini-about-us-counter,
-.mini-about-us-counter p{
-    font-weight: 400;
-    font-size: 35px;
-    line-height: 48px;
-    color: #3E3E3E;
+.scrollCounter {
+    overflow: hidden;
+    height: 1em;
 }
 
-.out-num1, .out-num2, .out-num3, .out-num4{
-    color: #FF364F;
-}
-
+.scrollCounter::before {
+    content: attr(data-number);
+    animation: scroll 5s linear infinite;
+    display: inline-block;
+}*/
 
 /* end about us on homepage */
 
