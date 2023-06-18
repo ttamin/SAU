@@ -5,26 +5,21 @@ import com.example.sau.model.User;
 import com.example.sau.repository.RoleRepo;
 import com.example.sau.service.impl.UserService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class AuthController {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    RoleRepo roleRepo;
+    private final  UserService userService;
+    private final RoleRepo roleRepo;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, RoleRepo roleRepo) {
         this.userService = userService;
+        this.roleRepo = roleRepo;
     }
 
     @GetMapping("/register")
@@ -49,8 +44,6 @@ public class AuthController {
         userService.saveUser(user);
         return "redirect:/register?success";
     }
-
-
 
 }
 

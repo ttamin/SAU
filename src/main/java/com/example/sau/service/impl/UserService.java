@@ -13,11 +13,12 @@ public interface UserService {
 
     List<User> findAllUsers();
 
-    void updateUserRoleToAdmin(Long userId);
 
     void deleteUserById(Long id);
 
-    public void removeUserRoleAdmin(Long userId);
-    public User changePassword(UserDto userDto);
+     User changePassword(UserDto userDto);
+     void removeUserRoleUser(Long userId);
+
+
 
 }

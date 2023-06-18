@@ -6,7 +6,6 @@ import com.example.sau.model.Product;
 import com.example.sau.service.BlogServiceImpl;
 import com.example.sau.service.CategoryServiceImpl;
 import com.example.sau.service.ProductServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +20,16 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/home")
 public class CustomerController {
-    @Autowired
-    CategoryServiceImpl categoryService;
-    @Autowired
-    ProductServiceImpl productServiceImpl;
-    @Autowired
-    BlogServiceImpl blogService;
 
+    private final CategoryServiceImpl categoryService;
+    private final ProductServiceImpl productServiceImpl;
+    private final BlogServiceImpl blogService;
+
+    public CustomerController(CategoryServiceImpl categoryService, ProductServiceImpl productServiceImpl, BlogServiceImpl blogService) {
+        this.categoryService = categoryService;
+        this.productServiceImpl = productServiceImpl;
+        this.blogService = blogService;
+    }
 
 
     @GetMapping("/shop")
@@ -38,7 +40,8 @@ public class CustomerController {
             model.addAttribute("cartCounter", GlobalData.cart.size());
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error retrieving shop data");
-            return "error-page/not-found";
+            return "404customer";
+
         }
         if (errorMessage != null && errorMessage.equals("addToCartError")) {
             model.addAttribute("errorMessage", "Error adding item to cart.");
@@ -54,7 +57,8 @@ public class CustomerController {
             model.addAttribute("products", productServiceImpl.getAllProductsByCategoryId(id));
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error retrieving products by category");
-            return "error-page/shop-error";
+            return "404customer";
+
         }
 
         return "home/shop";
@@ -68,11 +72,13 @@ public class CustomerController {
                 model.addAttribute("cartCounter", GlobalData.cart.size());
                 return "home/viewproduct";
             } else {
-                return "error-page/product-notfound";
+                return "404customer";
+
             }
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error retrieving product");
-            return "error-page/product-error";
+            return "404customer";
+
         }
     }
 
@@ -87,21 +93,17 @@ public class CustomerController {
     public String viewblogs(Model model){
         model.addAttribute("blogs", blogService.getAllBlogs());
         model.addAttribute("cartCounter", GlobalData.cart.size());
-
         return "home/blogPage";
     }
 
     @GetMapping("/blogs/{id}")
     public String blogDetails(Model model, @PathVariable long id){
-//        Blog blog = blogService.getBlogById(id)
-//                .orElseThrow(() -> new BlogNotFoundException("Blog not found with id: " + id));
         Blog blog = blogService.getBlogById(id).orElse(null);
         if (blog == null) {
-            return "error-page/blog-notfound";
+            return "404customer";
         }
         model.addAttribute("blog", blog);
         model.addAttribute("cartCounter", GlobalData.cart.size());
-
         return "home/blogDetails";
     }
 

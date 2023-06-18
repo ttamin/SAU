@@ -4,58 +4,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>PRODUCTS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
     <link rel="stylesheet" href="/css/normolize.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-admin.css">
 </head>
+
 <body>
+<header class="header">
+    <nav>
+        <a  th:href="@{/admin/products}">Продукты</a>
+        <a  th:href="@{/admin/products/add}" class="btn btn-primary">Добавить</a>
+    </nav>
+</header>
 
-    <header class="header">
-        <nav>
-            <a href="products.html" th:href="@{/admin/products/main}">Products</a>
-            <a href="productsAdd.html" th:href="@{/admin/products/add}" class="btn btn-primary">Add Product</a>
-        </nav>
-    </header>
+<section th:insert="blocks/section :: section"></section>
 
-    <section th:insert="blocks/section :: section"></section>
+<main class="main">
+    <div class="container">
+        <table class="table">
+            <thead class="thead-light"><!--Groups the header content in a table-->
+            <tr><!-- Defines a row in a table -->
+                <th scope="col">SN</th><!-- Defines a header cell in a table -->
+                <th scope="col">Название продукта</th>
+                <th scope="col">Категория</th>
+                <th scope="col">Текущее количество</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Просмотр</th>
+                <th scope="col">Удалить</th>
+                <th scope="col">Обновить</th>
+            </tr>
+            </thead>
+            <tbody class="tbody-light"><!-- Groups the body content in a table -->
+            <tr th:each="product, iStat : ${products}">
+                <th th:text="${iStat.index + 1}">1</th>
+                <td th:text="${product.name}">Larry</td>
+                <td th:text="${product.category.name}">Larry</td>
+                <td th:text="${product.currentQuantity}">1</td>
+                <td><span th:if="${product.active}">Yes</span>
+                    <span th:if="not ${product.active}">No</span></td>
 
+                <td><img th:src="@{${'/productImages/' +product.imageName}}" height="40px" width="40px" alt="product-img"></td>
 
-    <main class="main">
-        <div class="container">
-            <table class="table">
-                <thead class="thead-light"><!--Groups the header content in a table-->
-                    <tr><!-- Defines a row in a table -->
-                        <th scope="col">SN</th><!-- Defines a header cell in a table -->
-                        <th scope="col">Product name</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Current quantity</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Preview</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Update</th>
-                    </tr>
-                    </thead>
-                <tbody><!-- Groups the body content in a table -->
-                    <tr th:each="product, iStat : ${products}">
-                        <th scope="row" th:text="${iStat.index + 1}">1</th>
-                        <td th:text="${product.name}">Larry</td>
-                        <td th:text="${product.category.name}">Larry</td>
-                        <td th:text="${product.currentQuantity}">1</td>
-                        <td><span th:if="${product.active}">Yes</span></td>
-                        <td><span th:if="not ${product.active}">No</span></td>
-
-<!--                        <td><span th:if="${product.isActive()}">Yes</span></td>-->
-<!--                        <span th:if="not ${isCold}">It's warm</span>-->
-<!--                        <td th:text="${product.active}" />-->
-                        <td><img src="#" height="100px" width="100px" th:src="@{${'/productImages/' +product.imageName}}"></td>
-            <!--            <td><img src="#" height="100px" width="100px" th:src="${'data:image/jpeg;charset=utf-8;base64,' + images.get(product.imageName)}"></td>-->
-
-                        <td><a href="#" th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a> </td>
-                        <td><a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}" class="btn btn-warning">Update</a> </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+                <td><a href="#" th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn-delete">Удалить</a> </td>
+                <td><a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}" class="btn-update">Обновить</a> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 </body>
 </html>

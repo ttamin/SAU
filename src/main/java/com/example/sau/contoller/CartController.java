@@ -7,7 +7,6 @@ import com.example.sau.model.Product;
 import com.example.sau.service.CartItemServiceImpl;
 import com.example.sau.service.CustomerFormServiceImpl;
 import com.example.sau.service.ProductServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +20,17 @@ import java.util.Optional;
 @RequestMapping("/cart")
 public class CartController {
 
-        @Autowired
-        ProductServiceImpl productServiceImpl;
-        @Autowired
-        CartItemServiceImpl cartItemService;
-        @Autowired
-        CustomerFormServiceImpl customerFormService;
+    private final ProductServiceImpl productServiceImpl;
+    private final CartItemServiceImpl cartItemService;
+    private final CustomerFormServiceImpl customerFormService;
 
-        @GetMapping("")
+    public CartController(ProductServiceImpl productServiceImpl, CartItemServiceImpl cartItemService, CustomerFormServiceImpl customerFormService) {
+        this.productServiceImpl = productServiceImpl;
+        this.cartItemService = cartItemService;
+        this.customerFormService = customerFormService;
+    }
+
+    @GetMapping("")
         public String cartGet(Model model) {
             int totalItems = calculateTotalItems();
             model.addAttribute("cartCounter", totalItems);
@@ -141,10 +143,8 @@ public class CartController {
                 return "cart/successfulPage";
             }
 
-
             private double calculateTotal() {
                 return GlobalData.cart.stream().mapToDouble(CartItem::getSubTotal).sum();
             }
-
 
     }

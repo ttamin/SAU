@@ -2,7 +2,6 @@ package com.example.sau.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.Type;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 

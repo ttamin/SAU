@@ -3,7 +3,6 @@ package com.example.sau.service;
 import com.example.sau.model.Blog;
 import com.example.sau.repository.BlogRepo;
 import com.example.sau.service.impl.BlogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 
 @Service
 public class BlogServiceImpl implements BlogService {
-    @Autowired
-    BlogRepo blogRepo;
+    private final BlogRepo blogRepo;
+
+    public BlogServiceImpl(BlogRepo blogRepo) {
+        this.blogRepo = blogRepo;
+    }
 
     @Override
     public List<Blog> getAllBlogs() {

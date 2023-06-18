@@ -2,7 +2,6 @@ package com.example.sau.contoller;
 
 import com.example.sau.model.Category;
 import com.example.sau.service.CategoryServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -14,8 +13,12 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/categories")
 public class AdminCategoryController {
-    @Autowired
-    CategoryServiceImpl categoryService;
+
+    private final CategoryServiceImpl categoryService;
+
+    public AdminCategoryController(CategoryServiceImpl categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping("")
     public String getCategories(Model model){
@@ -41,7 +44,7 @@ public class AdminCategoryController {
             categoryService.removeCategoryById(id);
         } catch (Exception e) {
             e.printStackTrace();
-            return "error-page/category-error";
+            return "404admin";
         }
         return "redirect:/admin/categories";
     }
@@ -53,7 +56,7 @@ public class AdminCategoryController {
             model.addAttribute("category", category.get());
             return "admin/categoriesAdd";
         } else
-            return "error-page/category-error";
+            return "404admin";
     }
 
 }

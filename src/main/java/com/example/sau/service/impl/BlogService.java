@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BlogService {
-    public List<Blog> getAllBlogs();
-    public void addBlog(Blog blog);
-    public void removeBlogById(long id);
-    public Optional<Blog> getBlogById(long id);
+     List<Blog> getAllBlogs();
+     void addBlog(Blog blog);
+     void removeBlogById(long id);
+     Optional<Blog> getBlogById(long id);
 }

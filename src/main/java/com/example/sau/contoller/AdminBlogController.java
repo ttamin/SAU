@@ -3,7 +3,6 @@ package com.example.sau.contoller;
 import com.example.sau.dto.BlogDto;
 import com.example.sau.model.Blog;
 import com.example.sau.service.BlogServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +19,11 @@ import java.util.NoSuchElementException;
 
 public class AdminBlogController {
     public static String uplDir = System.getProperty("user.dir") +"/src/main/resources/static/blogImage";
+    private final BlogServiceImpl blogService;
 
-
-    @Autowired
-    BlogServiceImpl blogService;
+    public AdminBlogController(BlogServiceImpl blogService) {
+        this.blogService = blogService;
+    }
 
     @GetMapping("")
     public String blogs(Model model){
@@ -60,11 +60,10 @@ public class AdminBlogController {
         } catch (IOException e) {
             e.printStackTrace();
 
-            return "error-page/error";
+            return "404admin";
         }
         return "redirect:/admin/blogs";
     }
-
 
     @GetMapping("/delete/{id}")
     public String deleteBlog(@PathVariable long id){
@@ -73,7 +72,7 @@ public class AdminBlogController {
             return "redirect:/admin/blogs";
         } catch (NoSuchElementException e) {
             e.printStackTrace();
-            return "error-page/blog-notfound";
+            return "404admin";
         }
 
     }
@@ -96,7 +95,7 @@ public class AdminBlogController {
             return "admin/blogsAdd";
         } catch (Exception e) {
             e.printStackTrace();
-            return "error-page/blog-notfound";
+            return "404admin";
         }
     }
 }

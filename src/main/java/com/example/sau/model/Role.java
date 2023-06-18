@@ -22,8 +22,4 @@ public class Role {
     private String name;
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
-    public boolean isLast() {
-        return users.indexOf(this) == users.size() - 1;
-    }
-
 }

@@ -6,9 +6,6 @@ import com.example.sau.model.User;
 import com.example.sau.repository.RoleRepo;
 import com.example.sau.repository.UserRepo;
 import com.example.sau.service.impl.UserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,12 +56,6 @@ public class UserServiceImpl implements UserService {
         return userRepo.findAll();
     }
 
-    private UserDto convertEntityToDto(User user){
-        UserDto userDto = new UserDto();
-        userDto.setUsername(user.getUsername());
-        userDto.setEmail(user.getEmail());
-        return userDto;
-    }
 
     private Role checkRoleExist(String roleName) {
         Role role = new Role();
@@ -74,33 +65,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserRoleToAdmin(Long userId) {
-        User user = userRepo.findById(userId).orElse(null);
-        if (user != null) {
-            Role role = roleRepo.findByName("ROLE_ADMIN");
-            if (role == null) {
-                role = checkRoleExist("ROLE_ADMIN");
-            }
-            user.setRoles(List.of(role));
-            userRepo.save(user);
-        }
-    }
-
-    @Override
     public void deleteUserById(Long id) {
         userRepo.deleteById(id);
-    }
-
-    @Override
-    public void removeUserRoleAdmin(Long userId) {
-        User user = userRepo.findById(userId).orElse(null);
-        if (user != null) {
-            Role role = roleRepo.findByName("ROLE_ADMIN");
-            if (role != null) {
-                user.getRoles().remove(role);
-                userRepo.save(user);
-            }
-        }
     }
 
     @Override
@@ -109,4 +75,29 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userDto.getPassword());
         return userRepo.save(user);
     }
+    @Override
+    public void removeUserRoleUser(Long userId) {
+        User user = userRepo.findById(userId).orElse(null);
+        if (user != null) {
+            Role role = roleRepo.findByName("ROLE_USER");
+            if (role != null) {
+                user.getRoles().remove(role);
+                userRepo.save(user);
+            }
+        }
+    }
+
+//    @Override
+//    @Transactional
+//    public void changeUserRole(Long id, Long roleId) {
+//        User user = userRepo.findById(id).orElse(null);
+//        Role role = roleRepo.findById(roleId).orElse(null);
+//
+//        if (user != null && role != null) {
+//            user.setRoles(Collections.singletonList(role));
+//            userRepo.save(user);
+//        }
+//    }
+
+
 }

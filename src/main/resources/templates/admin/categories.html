@@ -4,50 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>CATEGORIES</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
     <link rel="stylesheet" href="/css/normolize.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-admin.css">
 </head>
+
 <body>
+<header class="header">
+    <nav>
+        <a th:href="@{/admin/categories}">Категории</a>
+        <a th:href="@{/admin/categories/add}" class="btn btn-primary">Добавить</a>
+    </nav>
+</header>
 
-    <header class="header">
-        <nav>
-            <a href="/templates/admin/categories.html" th:href="@{/admin/categories/main}">Categories</a>
-            <a href="/templates/admin/categoriesAdd.htmlesAdd.html" th:href="@{/admin/categories/add}" class="btn btn-primary">Add category</a>
-        </nav>
-    </header>
+<section th:insert="blocks/section :: section"></section>
 
-    <section th:insert="blocks/section :: section"></section>
+<main class="main">
+    <div class="container">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Название категории</th>
+                <th scope="col">Активный</th>
+                <th scope="col">Удалить</th>
+                <th scope="col">Обновить</th>
+            </tr>
+            </thead>
 
-    
-    <main class="main">
-        <div class="container">
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">SN</th>
-                        <th scope="col">Category name</th>
-                        <th scope="col">Active</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Update</th>
-                    </tr>
-                </thead>
-        
-              <tbody>
-              <tr th:each="category, iStat : ${categories}" >
+            <tbody class="tbody-light">
+            <tr th:each="category, iStat : ${categories}" >
                 <th scope="row" th:text="${iStat.index + 1}">1</th>
                 <td th:text="${category.name}">Larry</td>
-<!--                  <td th:text="${category.active} ? 'NO' : 'YES'" />-->
-
-                  <td><span th:if="${category.active}">Yes</span></td>
-                  <td><span th:if="not ${category.active}">No</span></td>
-                  <td th></td>
-                <td><a href="#" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a> </td>
-                <td><a href="#" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a> </td>
-              </tr>
-              </tbody>
-            </table>
-        </div>
-    </main>
+                <td><span th:if="${category.active}">Да</span>
+                    <span th:if="not ${category.active}">Нет</span>
+                </td>
+                <td><a href="#" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn-delete">Удалить</a> </td>
+                <td><a href="#" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn-update">Обновить</a> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 </body>
-</html> 
+</html>

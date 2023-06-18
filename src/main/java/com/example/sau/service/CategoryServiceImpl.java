@@ -3,7 +3,6 @@ package com.example.sau.service;
 import com.example.sau.model.Category;
 import com.example.sau.repository.CategoryRepo;
 import com.example.sau.service.impl.CategoryService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +10,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 
 public class CategoryServiceImpl implements CategoryService {
+    private final CategoryRepo categoryRepo;
+
     @Autowired
-    CategoryRepo categoryRepo;
+    public CategoryServiceImpl(CategoryRepo categoryRepo) {
+        this.categoryRepo = categoryRepo;
+    }
+
     @Override
     public List<Category> getAllCategory(){
         return categoryRepo.findAll();
