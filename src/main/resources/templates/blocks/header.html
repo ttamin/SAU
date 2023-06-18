@@ -1,33 +1,36 @@
-<div th:fragment="header">
+<div th:fragment="header" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="container">
         <div class="nav-logo">
-          <a th:href="@{/home}" href="#">
-            <img src="/images/SAU-LOGO.svg" alt="SAU logo"> <!--width="90" height="50"-->
-          </a>
+            <a th:href="@{/home}" href="#">
+                <img src="/images/SAU-LOGO.svg" alt="SAU logo">
+            </a>
         </div>
 
         <nav class="nav-bar">
             <ul>
-              <li> <a th:href="@{/home}" href="#">Главная</a></li>
-              <li> <a th:href="@{/home/shop}" href="#">Магазин</a></li>
-              <li> <a th:href="@{/home/about-us}" href="#">О нас</a></li>
-              <li> <a th:href="@{/home/info}" href="#">Информация</a></li>
-              <li> <a th:href="@{/home/blogs}" href="#">Блог</a></li>
+                <li> <a th:href="@{/home}">Главная</a></li>
+                <li> <a th:href="@{/home/shop}">Магазин</a></li>
+                <li> <a th:href="@{/home/about-us}">О нас</a></li>
+                <li> <a th:href="@{/home/info}">Информация</a></li>
+                <li> <a th:href="@{/home/blogs}">Блог</a></li>
             </ul>
         </nav>
 
         <div class="nav-btns">
-            <!--<div class="nav-search">
-              <a href="#"> <img src="/images/search.svg" alt="search"></a>
-            </div>-->
             <div class="nav-cart">
-              <a th:href="@{/cart}"> <img src="/images/cart.svg" alt="cart">
-                   <span th:text="${cartCounter}"></span>
-              </a>
+                <a th:href="@{/cart}"> <img src="/images/cart.svg" alt="cart">
+                    <span th:text="${cartCounter}"></span>
+                </a>
             </div>
             <div class="nav-register">
-              <a th:href="@{/login}" href="#">Войти</a>
+                <form class="nav-register" sec:authorize="!isAuthenticated()" >
+                    <a th:href="@{/login}" href="#">Войти</a>
+                </form>
+                <form class="nav-register" sec:authorize="isAuthenticated()" >
+                    <a th:href="@{/logout}" class="btn btn-primary" role="button" aria-desabled="true">Logout</a>
+                </form>
             </div>
         </div>
+        
     </div>
 </div>
