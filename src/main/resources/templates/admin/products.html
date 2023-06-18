@@ -45,8 +45,8 @@
                         <td th:text="${product.name}">Larry</td>
                         <td th:text="${product.category.name}">Larry</td>
                         <td th:text="${product.currentQuantity}">1</td>
-                        <td><span th:if="${product.active}">Yes</span>
-                            <span th:if="not ${product.active}">No</span></td>
+                        <td><span th:if="${product.active}">Да</span>
+                            <span th:if="not ${product.active}">Нет</span></td>
 
                         <td><img th:src="@{${'/productImages/' +product.imageName}}" height="40px" width="40px"></td>
 
