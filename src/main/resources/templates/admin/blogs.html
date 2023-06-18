@@ -32,8 +32,6 @@
                 <th scope="col">SN</th><!-- Defines a header cell in a table -->
                 <th scope="col">Название блога</th>
                 <th scope="col">Анонс блога</th>
-                <th scope="col">Текст</th>
-                <th scope="col">Просмотр</th>
                 <th scope="col">Удалить</th>
                 <th scope="col">Обновить</th>
             </tr>
@@ -43,8 +41,6 @@
                 <th th:text="${iStat.index + 1}">1</th>
                 <td th:text="${blog.name}">Larry</td>
                 <td th:text="${blog.anons}">Larry anons</td>
-                <!--                         <td th:text="${blog.getFulltext}">Larry Larry</td>
-                                        <td><img th:src="@{${'/blogImages/' +blog.imageName}}" height="40px" width="40px"></td> -->
                 <td><a th:href="@{/admin/blogs/delete/{id}(id=${blog.id})}" class="btn-delete">Удалить</a></td>
                 <td><a th:href="@{/admin/blogs/update/{id}(id=${blog.id})}" class="btn-update">Обновить</a></td>
             </tr>

@@ -4,44 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Categories</title>
+    <title>ADD CATEGORIES</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
     <link rel="stylesheet" href="/css/normolize.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-admin.css">
 </head>
 <body>
+<header class="header">
+    <nav>
+        <a th:href="@{/admin/categories}">Назад</a>
+    </nav>
+</header>
 
-    <header class="header">
-        <nav>
-            <a href="/templates/admin/categories.html" th:href="@{/admin/categories/main}">Back</a>
-            <a href="/templates/admin/categoriesAdd.html" th:href="@{/admin/categories/add}">Add categories</a>
-        </nav>
-    </header>
+<section th:insert="blocks/section :: section"></section>
 
-    <section th:insert="blocks/section :: section"></section>
+<main class="main">
+    <div class="add-container">
+        <div class="row">
+            <form th:action="@{/admin/categories/add}" method="post" th:object="${category}">
+                <input type="hidden" name="id" th:field="*{id}">
 
+                <div class = "form-group">
+                    <h3>Наименование категории</h3>
+                    <input type="text" class="form-control" required th:field="*{name}" name="name" minlength="1" maxlength="12" size="44">
+                </div>
 
-    <main class="main">
-        <div class="container">
-            <div class="row">
-                <form th:action="@{/admin/categories/add}" method="post" th:object="${category}">
-                    <input type="hidden" name="id" th:field="*{id}">
-                    <div class = "form-group">
-                        <!--<label for="name">Name</label>-->
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" required th:field="*{name}" name="name" id="name">
-    
-                    </div>
-                    <div class="form-control">
-                        <label>
-                            <input type="checkbox" name="active" th:checked="*{isActive()}"> Active
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+                <div class="form-control-check">
+                    <h3> Активный: <input class="form-control-checkbox" type="checkbox" name="active" th:checked="*{isActive()}"></h3>
+                </div>
+
+                <button type="submit" class="btn-submit">Готово</button>
+            </form>
         </div>
-    </main>
-
+    </div>
+</main>
 
 </body>
 </html>

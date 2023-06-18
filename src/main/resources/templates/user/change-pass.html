@@ -19,45 +19,21 @@
 
 <main class="login-register-form">
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-
-        <div class="card">
-          <div class="card-header">
-            <h3 class="text-center">Change Password</h3>
+    <h1>Поменять пароль</h1>
+        <form method="post" th:action="@{/update-pass}" role="form">
+          <table>
+            <tr>
+              <td><input class="login-input" type="text" id="email" name="email" required placeholder="Электронная почта"></td>
+            </tr>
+            <tr>
+              <td> <input class="login-input" type="password" id="password" name="password" required placeholder="Новый пароль"></td>
+            </tr>
+          </table><br/>
+          <div class="register-btn">
+            <button class="register-btn" type="submit">Изменить</button>
           </div>
-          <div class="card-body">
-            <form
-                    method="post"
-                    th:action="@{/update-pass}"
-                    class="form-horizontal"
-                    role="form"
-            >
-              <div class="mb-3">
-                <label for="email" class="control-label">Email</label>
-                <input type="text"
-                       id="email"
-                       name="email"
-                       class="form-control"
-                       placeholder="Email"
-                />
-              </div>
+        </form>
 
-              <div class="mb-3">
-                <label for="password" class="control-label">New password</label>
-                <input type="password"
-                       id="password"
-                       name="password"
-                       class="form-control"
-                       placeholder="New password"
-                />
-              </div>
-
-              <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Change password</button>
-              </div>
-
-            </form>
           </div>
         </div>
       </div>

@@ -51,5 +51,9 @@ public class LoginController {
         userService.changePassword(userDto);
         return "redirect:/home";
     }
+    @GetMapping("/forgot-pass")
+    public String forgotPass() {
+        return "user/forgot-pass";
+    }
 
 }

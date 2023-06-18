@@ -15,46 +15,46 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
-    <header th:insert="blocks/header :: header"></header>
+<header th:insert="blocks/header :: header"></header>
 
-    <main class="login-register-form">
-        <div class = "container">
-            <div class="register-form">
+<main class="login-register-form">
+    <div class = "container">
+        <div class="register-form">
 
-                <div th:if="${param.success}">
-                    <div class="alert alert-info">You've successfully registered
-                        to our app!</div>
+            <div th:if="${param.success}">
+                <div class="alert alert-info">You've successfully registered
+                    to our app!</div>
+            </div>
+
+            <h1>Регистрация</h1>
+            <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+
+                <div class="form-group">
+                    <input type="text" id="username" autofocus="autofocus" required placeholder="username" minlength="3" maxlength="19" size="44" class="form-control" name="username" th:field="*{username}">
+                    <p th:errors="*{username}" class="text-danger" th:if="${#fields.hasErrors('username')}"></p>
                 </div>
 
-                <h1>Регистрация</h1>
-                <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+                <div class="form-group">
+                    <input type="text" id="email" autofocus="autofocus" required placeholder="Электронная почта" minlength="8" maxlength="150" size="44" class="form-control" name="email" th:field="*{email}">
+                    <p th:errors="*{email}" class="text-danger" th:if="${#fields.hasErrors('email')}"></p>
+                </div>
 
-                    <div class="form-group">
-                        <input type="text" id="username" autofocus="autofocus" required placeholder="username" minlength="3" maxlength="19" size="44" class="form-control" name="username" th:field="*{username}">
-                        <p th:errors="*{username}" class="text-danger" th:if="${#fields.hasErrors('username')}"></p>
-                    </div>
+                <div class="form-group">
+                    <input type="password" id="password" autofocus="autofocus" required placeholder="Пароль" minlength="8" maxlength="15" size="44" class="form-control" name="password" th:field="*{password}">
+                    <p th:errors="*{password}" class="text-danger" th:if="${#fields.hasErrors('password')}"></p>
+                </div>
 
-                    <div class="form-group">
-                        <input type="text" id="email" autofocus="autofocus" required placeholder="Электронная почта" minlength="8" maxlength="150" size="44" class="form-control" name="email" th:field="*{email}">
-                        <p th:errors="*{email}" class="text-danger" th:if="${#fields.hasErrors('email')}"></p>
-                    </div>
+                <input type="checkbox" name="isUserCheck" class="checkbox" id="checkbox" required value="yes">
+                <label for="checkbox"> Я согласен с условиями обслуживания.</label>
 
-                    <div class="form-group">
-                        <input type="password" id="password" autofocus="autofocus" required placeholder="Пароль" minlength="8" maxlength="15" size="44" class="form-control" name="password" th:field="*{password}">
-                        <p th:errors="*{password}" class="text-danger" th:if="${#fields.hasErrors('password')}"></p>
-                    </div>
+                <div class="register-btn">
+                    <button class="register-btn" type="submit">Регистрация</button>
+                </div>
 
-                    <input type="checkbox" name="isUserCheck" class="checkbox" id="checkbox" required value="yes">
-                    <label for="checkbox"> Я согласен с условиями обслуживания.</label>
-
-                    <div class="register-btn">
-                        <button class="register-btn" type="submit">Регистрация</button>
-                    </div>
-                    
-                    <span> Уже зарегистрированы? <a th:href="@{/login}">Войти</a></span>
-                </form>
-            </div>
+                <span> Уже зарегистрированы? <a th:href="@{/login}">Войти</a></span>
+            </form>
         </div>
-    </main>
+    </div>
+</main>
 </body>
 </html>

@@ -38,11 +38,11 @@
                 </td>
 
                 <td class="subtotal-price" th:text="${item.subTotal}"></td>
+
                 <td>
                     <form th:action="@{/cart/updateQuantity}" method="post">
                         <input type="hidden" name="productId" th:value="${item.product.id}" />
-                        <input class="subtotal-quantity" type="number" min="1" name="quantity" th:value="${item.quantity}" />
-                        <button type="submit">Обновить</button>
+                        <input class="subtotal-quantity" type="number" min="1" name="quantity" th:value="${item.quantity}"/>
                     </form>
                 </td>
 
@@ -55,10 +55,9 @@
 
         <h2>Total: <span class="total-item" th:text="${total}"></span></h2>
 
-        <a href="/checkout">Checkout</a>
+        <a href="/cart/checkout">Checkout</a>
     </div>
 </main>
-
 
 <script src="/js/calculateSubtotal.js"></script>
 

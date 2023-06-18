@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAU CHANGE PASS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
-<h1>Forgot pass</h1>
+<header th:insert="blocks/header :: header"></header>
+
+<main class="login-register-form">
+    <div class="container">
+        <h1>Восстановление пароля</h1>
+        <h1> через почту</h1>
+        <form method="post" th:action="@{/update-pass}" role="form">
+            <table>
+                <tr>
+                    <td><input class="login-input" type="text" id="email" name="email" required placeholder="Электронная почта"></td>
+            </table><br/>
+            <div class="register-btn">
+                <button class="register-btn" type="submit">Получить пароль</button>
+            </div>
+        </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</main>
 </body>
 </html>

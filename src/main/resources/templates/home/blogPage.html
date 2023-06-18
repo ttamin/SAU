@@ -7,9 +7,9 @@
 <body>
 <tr th:each="blog, iStat : ${blogs}">
 
-<td th:text="${blog.name}">Larry</td>
-<td th:text="${blog.anons}">Larry anons</td>
-<td><img src="#" height="100px" width="100px" th:src="@{${'/blogImages/' +blog.imageName}}"></td>
+    <td th:text="${blog.name}">Larry</td>
+    <td th:text="${blog.anons}">Larry anons</td>
+    <td><img src="#" height="100px" width="100px" th:src="@{${'/blogImages/' +blog.imageName}}"></td>
 
     <a href="#" th:href="@{/home/blogs/{id} (id=${blog.id})}" class="btn btn-primary">View</a>
 
