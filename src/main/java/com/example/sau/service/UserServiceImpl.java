@@ -1,27 +1,25 @@
 package com.example.sau.service;
 
 import com.example.sau.dto.UserDto;
-import com.example.sau.exception.UserAlreadyExistsException;
-import com.example.sau.exception.UserNotExistsException;
 import com.example.sau.model.Role;
 import com.example.sau.model.User;
 import com.example.sau.repository.RoleRepo;
 import com.example.sau.repository.UserRepo;
 import com.example.sau.service.impl.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
+
     private final RoleRepo roleRepo;
+
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepo userRepo, RoleRepo roleRepo,
@@ -30,6 +28,8 @@ public class UserServiceImpl implements UserService {
         this.roleRepo = roleRepo;
         this.passwordEncoder = passwordEncoder;
     }
+
+
 
     @Override
     public void saveUser(UserDto userDto) {
@@ -101,5 +101,12 @@ public class UserServiceImpl implements UserService {
                 userRepo.save(user);
             }
         }
+    }
+
+    @Override
+    public User changePassword(UserDto userDto){
+        User user = userRepo.findByEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        return userRepo.save(user);
     }
 }

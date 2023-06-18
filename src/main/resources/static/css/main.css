@@ -13,8 +13,7 @@ header{
 }
 
 header .container,
-.nav-bar ul,
-.nav-btns{
+.nav-bar ul, .nav-btns{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -64,19 +63,70 @@ header .container,
 /* end navigation */
 
 /* banner */
-.banner h1{
-    font-weight: 700;
-    font-size: 66px;
-    line-height: 90px;
-    color:#323232;
+.banner{
+    position: relative;
+    margin: auto;
 }
 
-.banner h2{
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 54px;
-    /*text-align: center;*/
-    color:#323232;
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 20px;
+    color: #000000;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    background-color: #F2F2F2;
+    opacity: 80%;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    color: #ffffff;
+    background-color: #000000;
+    opacity: 80%;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+.dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.myElement {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
 }
 /* end banner */
 
@@ -104,64 +154,46 @@ header .container,
     font-weight: 700;
     font-size: 23px;
     line-height: 31px;
-    color: #373737;
+    color: #323232;
 
-    margin:17px 0;
+    margin:10px 0;
 }
 .popular-mini-card h5{
     font-weight: 400;
     font-size: 23px;
     line-height: 31px;
-    color: #929292;
+    color: #6B6B6B;
+
+    padding-bottom:25px;
 }
 /* end popular week of product */
 
 /* about us on homepage
-.about-us{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-top: 200px;
-}
-.about-us-left-text h1{
-    font-weight: 700;
-    font-size: 44px;
-    line-height: 60px;
-    color: #373737;
-    text-align: center;
+@keyframes scroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
 }
 
-.about-us-left-text h2{
-    font-weight: 400;
-    font-size: 23px;
-    line-height: 31px;
-    color: #565656;
-    text-align: center;
+.scrollCounter {
+    overflow: hidden;
+    height: 1em;
 }
 
-.about-us-left a{
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 27px;
-    color: #252525;
-    text-decoration: none;
-    text-align: center;
+.scrollCounter::before {
+    content: attr(data-number);
+    animation: scroll 5s linear infinite;
+    display: inline-block;
+}*/
 
-
-    border: 1px #272727 solid;
-    border-radius: 12px;
-    padding: 0px 35px;
-}
-*/
+/* end about us on homepage */
 
 /* shop page */
-.search-part{
+.shop-page .container{
     display: flex;
     justify-content: space-between;
 }
 
-.search-part h1 a{
+.shop-left-side h1 a{
     text-decoration: none;
     font-weight: 400;
     font-size: 18px;
@@ -171,20 +203,7 @@ header .container,
     padding-bottom: 32px;
 }
 
-.search-part input{
-    font-size: 18px;
-    line-height: 25px;
-    border: 1px solid #BFBFBF;
-    border-radius: 12px;
-    width: 320px;
-    padding: 10px;
-}
-
-.search-part input::placeholder{
-    color: #A9A3A3;
-}
-
-.container .product-list{
+.product-list{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -195,6 +214,10 @@ header .container,
     margin-top: 32px;
 }
 
+.product-list .product:last-child{
+    padding-right: 40px;
+}
+
 .product-list .product h3{
     font-size: 19px;
     font-weight: 700;
@@ -203,8 +226,7 @@ header .container,
 
     margin-top: 10px;
 }
-
-.container .product-list .product h4{
+.product-list .product h4{
     font-weight: 400;
     font-size: 19px;
     color: #6B6B6B;
@@ -219,17 +241,148 @@ header .container,
     text-decoration: none;
     padding: 15px 31px;
 
+    transition: all 0.2s ease;
 }
 
+.view-product-detail-btn:hover{
+    opacity: 50%;
+}
+
+.shop-right-side input{
+    font-size: 18px;
+    border: 1px solid #BFBFBF;
+    border-radius: 12px;
+    width: 320px;
+    padding: 10px;
+}
+.shop-right-side input::placeholder{
+    color: #A9A3A3;
+}
+
+.categories{
+    margin-right: 180px;
+}
+.categories h4{
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 31px;
+    color: #2D2D2D;
+
+    margin-top: 25px;
+}
+.categories .list-group a{
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 26px;
+    color: #7E7E7E;
+    text-decoration: none;
+}
 /* end shop page */
+
+/* view product detail */
+.shop-view-product-detail{
+    display: flex;
+    justify-content: space-between;
+}
+.shop-product-way{
+    display: flex;
+}
+.shop-product-way h1 a{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    color: #7E7E7E;
+    text-decoration: none;
+}
+.shop-product-detail h3{
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 41px;
+    color: #2B2B2B;
+}
+.shop-product-detail h4{
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 34px;
+    color: #323232;
+    margin: 15px 0px;
+}
+.shop-product-detail h5{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    color: #535353;
+    margin-bottom: 20px;
+}
+.shop-product-detail p{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    color: #978E8E;
+    margin-bottom: 30px;
+}
+form .add-to-cart-btn{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    color: #FCFCFC;
+    padding: 15px 31px;
+    background-color: #FF364F;
+    border: 1px solid #FCFCFC;
+    border-radius: 12px;
+}
+form .add-to-cart-btn:hover{
+    color: #FF364F;
+    background-color: #FCFCFC;
+    border: 1px solid #FF364F;
+    border-radius: 12px;
+}
+/* end view product detail */
+
+
+/* cart page */
+.cart-page .container p{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #323232;
+    margin: 40px 0 20px 0;
+}
+
+#cart-page-form{
+    width: 100%;
+}
+
+#cart-page-form th{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    color: #323232;
+
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#cart-page-form td{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #323232;
+    text-align: center;
+
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* end cart page */
+
 
 /* information SAU page*/
 .info-page{
     margin-top: 65px;
 }
 
-.info-delivery h2,
-.info-contact h2,
+.info-delivery h2, .info-contact h2,
 .info-faq h2{
     font-weight: 700;
     font-size: 2rem;
@@ -285,16 +438,15 @@ header .container,
 }
 
 /* about us page */
-.about-us-farm,
-.about-us-product,
-.about-us-team,
-.about-us-health{
+.about-us-farm, .about-us-product,
+.about-us-team, .about-us-health{
     display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 95px auto;
 }
 
-.about-us-farm article, .about-us-team article
-{
+.about-us-farm article, .about-us-team article {
     padding-left: 70px;
 }
 .about-us-product article, .about-us-health article{
@@ -327,13 +479,12 @@ header .container,
 
 .about-us-product article,
 .about-us-health article{
-    float: left;
+    text-align: center;
 }
 /* end about us page */
 
 /* cart empty */
-.cart-empty-client .container img,
-.cart-empty-client h1,
+.cart-empty-client .container img, .cart-empty-client h1,
 .cart-empty-client h2{
     display: flex;
     justify-content: center;
@@ -355,8 +506,9 @@ header .container,
     text-align: center;
     color: #A5A5A5;
 }
+/* end cart empty */
 
-/* log in, register, forgot password - client */
+/* log in, register, forgot password */
 .login-register-form h1, .login-register-form h3,
 .login-input, .login-btns, .login-alt a, .register-btn a{
     display: flex;
@@ -372,8 +524,7 @@ header .container,
     margin-bottom: 20px;
 }
 
-.login-register-form h1,
-.forgot-password-form h1{
+.login-register-form h1, .forgot-password-form h1{
     font-weight: 700;
     font-size: 32px;
     line-height: 44px;
@@ -388,8 +539,7 @@ header .container,
     text-decoration: none;
 }
 
-.login-input,
-.form-control{
+.login-input, .form-control{
     border: 1px solid #323232;
     border-radius: 12px;
     padding: 18px 26px;
@@ -440,12 +590,13 @@ header .container,
     padding: 18px 50px;
     transition: all 0.2s ease;
 }
+
 .register-btn button:hover{
     background-color: #FF364F;
     color: #FFFFFF;
     cursor: pointer;
 }
-
+/* end log in, register, forgot password */
 
 /*https://itchief.ru/html-and-css/styling-checkbox-and-radio?ysclid=liuc9sfny333336888  отсюда взяла код чекбокса*/
 .checkbox{
@@ -554,5 +705,3 @@ footer .row{
         width: 100%;
     }
 }*/
-
-

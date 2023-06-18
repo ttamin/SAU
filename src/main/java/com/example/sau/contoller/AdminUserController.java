@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 @Controller
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/admin/users")
+public class AdminUserController {
     @Autowired
     private UserService userService;
     @GetMapping("")
     public String listRegisteredUsers(Model model){
         List<User> roleUsers = userService.findAllUsers();
         model.addAttribute("users", roleUsers);
-        return "/users/users";
+        return "/admin/users";
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteUser(@PathVariable Long id){
-//        userService.deleteUserById(id);
-//        return "redirect:/users";
-//
-//    }
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id){
+        userService.deleteUserById(id);
+        return "redirect:/users";
+    }
+
 //    @PostMapping("/{id}/promote")
 //    public String promoteUserToAdmin(@PathVariable("id") Long userId) {
 //        userService.updateUserRoleToAdmin(userId);
@@ -41,7 +41,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PostMapping("/{userId}/remove-admin")
+    @PostMapping("/{userId}/remove")
     public String removeUserRoleAdmin(@PathVariable("userId") Long userId) {
         userService.removeUserRoleAdmin(userId);
         return "redirect:/users";

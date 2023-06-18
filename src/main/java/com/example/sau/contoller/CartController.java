@@ -68,13 +68,15 @@ public class CartController {
                 return "redirect:/shop?error=addToCartError";
             }
 
-            return "redirect:/shop";
+            return "redirect:/home/shop";
         }
 
         @PostMapping("/add")
-        public String addItemToCart(@RequestParam("productId") long productId, RedirectAttributes redirectAttributes) {
+        public String addItemToCart(@RequestParam("productId") long productId,
+                                    RedirectAttributes redirectAttributes, Model model) {
             try {
                 Optional<Product> productOptional = productServiceImpl.getProductById(productId);
+                model.addAttribute("cartSize", GlobalData.cart.size());
                 if (productOptional.isPresent()) {
                     Product product = productOptional.get();
 
@@ -92,7 +94,7 @@ public class CartController {
                 redirectAttributes.addAttribute("errorMessage", "Error adding item to cart. Please try again.");
             }
 
-            return "redirect:/shop";
+            return "redirect:/home/shop";
         }
 
 

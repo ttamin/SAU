@@ -32,7 +32,7 @@ public class AuthController {
         UserDto user = new UserDto();
         model.addAttribute("user", user);
         model.addAttribute("roleList", roleRepo.findAll());
-        return "/users/register";
+        return "/user/register";
     }
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDto user,
@@ -40,11 +40,11 @@ public class AuthController {
                                Model model){
         User existing = userService.findByEmail(user.getEmail());
         if (existing != null) {
-            result.rejectValue("email", null, "Este email ya esta registrado con una cuenta");
+            result.rejectValue("email", null, "Такой адрес почты уже используется");
         }
         if (result.hasErrors()) {
             model.addAttribute("user", user);
-            return "/users/register";
+            return "/user/register";
         }
         userService.saveUser(user);
         return "redirect:/register?success";
