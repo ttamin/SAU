@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:tn="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,62 +15,37 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
-<header th:insert="blocks/header :: header"></header>
-
-<main class="login-register-form">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">Invalid Email and Password.</div>
-                </div>
-                <div th:if="${param.logout}">
-                    <div class="alert alert-success">You have been logged out.</div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="text-center">Login Form</h3>
-                    </div>
-                    <div class="card-body">
-                        <form
-                                method="post"
-                                th:action="@{/login}"
-                                class="form-horizontal"
-                                role="form"
-                        >
-                            <div class="mb-3">
-                                <label for="username" class="control-label">Email *</label>
-                                <input type="text"
-                                       id="username"
-                                       name="username"
-                                       class="form-control"
-                                       placeholder="Email"
-                                />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password" class="control-label">Password *</label>
-                                <input type="password"
-                                       id="password"
-                                       name="password"
-                                       class="form-control"
-                                       placeholder="Password"
-                                />
-                            </div>
-
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Login</button>
-                                <span> Not registered?
-                            <a th:href="@{/register}"> Register/SignUp Here</a>
-                        </span>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
+    <header th:insert="blocks/header :: header"></header>
+    
+    <main class="login-register-form">
+        <div class="container">
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid Email and Password.</div>
             </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-success">You have been logged out.</div>
+            </div>
+
+            <h1>Личный кабинет</h1>
+
+            <form method="post" th:action="@{/login}" class="login-input" role="form"> </form>
+
+            <div class="mb-3">
+                <label for="username" class="control-label"></label>
+                <input id="username" class="login-input" type="text" name="username" placeholder="Электронная почта" required minlength="4" maxlength="150" size="44" />
+            </div>
+            <div class="mb-3">
+                <label for="password" class="control-label"></label>
+                <input id="password" class="login-input" type="password" name="password" placeholder="Пароль" required minlength="8" maxlength="15" size="44" />
+            </div>
+
+            <h3><a href="#">Забыли пароль?</a></h3>
+
+            <section class="login-btns">
+                <a>Войти</a>
+                <span class="register-btn"><a th:href="@{/register}">Регистрация</a></span>
+            </section>
         </div>
-    </div>
-</main>
+    </main>
 </body>
 </html>

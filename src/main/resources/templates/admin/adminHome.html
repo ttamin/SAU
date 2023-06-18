@@ -5,21 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
     <link rel="stylesheet" href="/css/normolize.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-admin.css">
 </head>
 <body>
 
-    <header class="header">
-<!--         <h5>Categories</h5>
-        <a href="#">Add category</a> -->
-    </header>
+    <header class="header"></header>
 
     <section th:insert="blocks/section :: section"></section>
 
-    <div class="container">
-        <h1>Welcome, <span th:text="${username}"></span>!</h1>
-    </div>
+    <main class="main">
+        <div class="container">
+            <h1>Welcome, <span th:text="${username}"></span>!</h1>
+        </div>
+    </main>
 
 </body>
 </html>
