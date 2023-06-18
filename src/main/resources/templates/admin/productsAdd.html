@@ -4,76 +4,91 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Products</title>
+    <title>ADD PRODUCTS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
     <link rel="stylesheet" href="/css/normolize.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-admin.css">
 </head>
 <body>
 
-    <header class="header">
-        <nav>
-            <a href="products.html" th:href="@{/admin/products/main}">Products</a>
-            <a href="productsAdd.html" th:href="@{/admin/products/add}" class="btn btn-primary">Add Product</a>
-        </nav>
-    </header>
+<header class="header">
+    <nav>
+        <a th:href="@{/admin/products}">Назад</a>
+    </nav>
+</header>
 
-    <section th:insert="blocks/section :: section"></section>
+<section th:insert="blocks/section :: section"></section>
 
+<main class="main">
+    <div class="add-container">
+        <form th:action="@{/admin/products/add}" method="post" th:object="${productDto}" enctype="multipart/form-data">
+            <div class="row">
 
-    <main class="main">
-        <div class="container">
-            <h3>Add a new Product</h3>
-            <form th:action="@{/admin/products/add}" method="post" th:object="${productDto}" enctype="multipart/form-data">
-                <div class="row">
-                    <input type="hidden" name="id" th:field="*{id}">
+                <input type="hidden" name="id" th:field="*{id}">
+                <div class="form-group">
+                    <h3>Название продукта</h3>
+                    <input type="text" class="form-control" required th:field="*{name}" name="name"
+                           placeholder="Enter name" minlength="1" maxlength="25" size="44">
+                </div>
+
+                <div id="form-group-line">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" required th:field="*{name}" name="name"
-                            placeholder="Enter name">
-                    </div>
-                    <div class="form-group">
-                        <label>Category</label>
+                        <h3>Категория</h3>
                         <select class="form-control" th:field="*{categoryId}" id="category" name="category_id">
                             <option th:each="category :${categories}"
                                     th:value="${category.id}"
                                     th:text="${category.name}">
-    
                             </option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Current Quantity</label>
-                        <input type="number" class="four-control" required th:field="*{currentQuantity}" id="currentQuantity" name="currentQuantity"
+
+                    <div id="form-group-line-2" class="form-group">
+                        <h3>Текущее количество</h3>
+                        <input type="number" class="form-control" required th:field="*{currentQuantity}" id="currentQuantity" name="currentQuantity"
                                placeholder="Current Quantity">
                     </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" name="active" th:checked="${productDto.active}"> Active</label>
-                    </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="number" class="form-control" required th:field="*{price}" id="price" name="price"
-                            placeholder="Price">
-                    </div>
-                    <div class="form-group">
-                        <label>Product Description</label>
-                        <textarea class="form-control" rows="5" th:field="*{description}" name="description" id="description"></textarea>
-                    </div>
+
                 </div>
-                <div class="col-sm-5">
-                    <p>Product Image</p>
+
+                <div class="form-group">
+                    <h3 class="form-group-active">Активный: <input class="form-control-checkbox" type="checkbox" name="active" th:checked="${productDto.active}"> </h3>
+                </div>
+
+                <div class="form-group">
+                    <h3>Цена</h3>
+                    <input type="number" class="form-control" required th:field="*{price}" id="price" name="price" placeholder="Price">
+                </div>
+
+                <div class="form-group">
+                    <h3>Описание продукта</h3>
+                    <textarea class="form-control" rows="5" th:field="*{description}" name="description" id="description"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Изображение продукта</h3>
+                <div class="form-group-add-img">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="productImage" accept="image/svg+xml, image/jpeg, image/png" />
-                        <label>Choose file</label>
+                        <label>Выберите файл</label>
                     </div>
-                    <div class="form-group">
-                        <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/productImages/'+productDto.imageName}}">
-                    </div>
-                    <input type="hidden" name="imgName" th:value="${productDto.imageName}">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
 
-            <script>
+                    <div class="form-group">
+                        <img th:src="@{${'/productImages/'+productDto.imageName}}" id="imgPreview" height="100px" width="100px">
+                    </div>
+
+                    <input type="hidden" name="imgName" th:value="${productDto.imageName}">
+                </div>
+
+                <button type="submit" class="btn-submit">Готово</button>
+            </div>
+        </form>
+
+        <script>
             function readURL(input){
                 if(input.files && input.files[0]){
                     var reader = new FileReader();
@@ -90,9 +105,9 @@
                 var fileName = $(this).var().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
-            </script>
-        </div>
-    </main>
+        </script>
+    </div>
+</main>
 
 
 </body>
