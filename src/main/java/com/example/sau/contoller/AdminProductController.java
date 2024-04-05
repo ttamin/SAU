@@ -61,6 +61,7 @@ public class AdminProductController {
             } else {
                 imageUUID = imgName;
             }
+            imageUUID += "?" + System.currentTimeMillis(); // Добавление временной метки к имени изображения
             product.setImageName(imageUUID);
             productServiceImpl.addProduct(product);
         } catch (IOException e) {

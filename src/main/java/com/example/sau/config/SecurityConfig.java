@@ -32,10 +32,7 @@ public class SecurityConfig {
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-//    @Bean
-//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -50,21 +47,20 @@ public class SecurityConfig {
         http
                 .userDetailsService(userDetailsService)
                 .authorizeHttpRequests((authorize) ->
-                        authorize
-                                .requestMatchers("/register/**", "/", "/home/**", "").permitAll()
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                authorize
+                                        .requestMatchers("/register/**", "/", "/home/**", "").permitAll()
+                                        .requestMatchers("/admin/**").hasRole("ADMIN")
 //                                .requestMatchers("/users/{id}/promote").hasRole("ADMIN")
-                                .requestMatchers("/home/blogs/**").permitAll()
-                                .requestMatchers("/users/**").hasRole("ADMIN")
-                                .requestMatchers("/cart/**").authenticated()
-                                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                                .anyRequest().authenticated()
+                                        .requestMatchers("/home/blogs/**").permitAll()
+                                        .requestMatchers("/users/**").hasRole("ADMIN")
+                                        .requestMatchers("/cart/**").authenticated()
+                                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                                        .anyRequest().authenticated()
                 )
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-//                                .loginProcessingUrl("/process-login")
                                 .defaultSuccessUrl("/home")
                                 .failureUrl("/login?error=true")
                                 .permitAll()

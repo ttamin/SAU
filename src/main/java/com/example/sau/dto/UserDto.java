@@ -1,6 +1,5 @@
 package com.example.sau.dto;
 
-//import jakarta.validation.constraints.Size;
 import com.example.sau.model.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

@@ -30,13 +30,4 @@ public class AdminUserController {
         return "redirect:/admin/users";
     }
 
-//    @PostMapping("/change-role/{id}")
-//    public String changeUserRole(@PathVariable Long id, @RequestParam("roleId") Long roleId) {
-//        System.out.println("OOOOOOO");
-//        userService.changeUserRole(id, roleId);
-//        System.out.println("YYYYYY");
-//        return "redirect:/admin/users";
-//
-//    }
-
 }

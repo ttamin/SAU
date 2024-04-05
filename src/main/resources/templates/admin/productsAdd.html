@@ -78,7 +78,9 @@
                     </div>
 
                     <div class="form-group">
-                        <img th:src="@{${'/productImages/'+productDto.imageName}}" id="imgPreview" height="100px" width="100px">
+<!--                        <img th:src="@{${'/productImages/'+productDto.imageName}}" id="imgPreview" height="100px" width="100px">-->
+                        <img th:src="@{'/productImages/' + ${productDto.imageName}}" id="imgPreview" height="100px" width="100px">
+
                     </div>
 
                     <input type="hidden" name="imgName" th:value="${productDto.imageName}">

@@ -87,17 +87,4 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-//    @Override
-//    @Transactional
-//    public void changeUserRole(Long id, Long roleId) {
-//        User user = userRepo.findById(id).orElse(null);
-//        Role role = roleRepo.findById(roleId).orElse(null);
-//
-//        if (user != null && role != null) {
-//            user.setRoles(Collections.singletonList(role));
-//            userRepo.save(user);
-//        }
-//    }
-
-
 }
