@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD CATEGORIES</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/SAU-LOGO.svg">
+    <link rel="stylesheet" href="/css/normolize.css">
+    <link rel="stylesheet" href="/css/main-admin.css">
+</head>
+<body>
+
+<!-- ваша форма для создания администратора -->
+<form th:action="@{/admin/users/create-admin}" th:object="${adminUser}" method="post">
+    <!-- поля формы для ввода данных администратора -->
+    <input type="text" th:field="*{username}" placeholder="Username"/>
+    <input type="text" th:field="*{email}" placeholder="Email"/>
+    <input type="password" th:field="*{password}" placeholder="Password"/>
+
+    <!-- другие поля, если необходимо -->
+
+    <button type="submit">Create Admin</button>
+</form>
+
+</body>
+</html>
